@@ -1,0 +1,6 @@
+'use strict';jQuery(function($){$('form.quform').Quform();if(window.tippy){$('.quform-tooltip').each(function(){tippy(this,{theme:'quform'});});}
+$('#subject').replaceSelectWithTextInput({onValue:'Other'});});(function($){$(window).on('load',function(){var images=['assets/img/close.png','assets/img/success.png','assets/img/error.png','assets/img/default-loading.gif'];if($('.quform-theme-light-light, .quform-theme-light-rounded').length){images=images.concat(['quform/themes/light/images/button-active-bg-rep.png','assets/img/close.png','assets/img/input-active-bg-rep.png']);}
+if($('.quform-theme-dark-dark, .quform-theme-dark-rounded').length){images=images.concat(['assets/img/button-active-bg-rep.png','assets/img/close.png','assets/img/input-active-bg-rep.png','assets/img/loading.gif']);}
+if($('.quform-theme-minimal-light').length){images=images.concat(['assets/img/close-light.png']);}
+if($('.quform-theme-minimal-dark').length){images=images.concat(['assets/img/images/close-dark.png','assets/img/loading-dark.gif']);}
+$.preloadImages(images);});})(jQuery);
