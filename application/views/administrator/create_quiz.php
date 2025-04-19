@@ -83,6 +83,24 @@
   <?php endif; ?>
 
   <div class="row">
+
+ 
+
+ 
+  <div class="col-md-6 mb-3">
+  <label for="course_id">Choose Course <?php // $ccourse->id; ?></label>
+  <select class="form-control" name="course_id" id="course_id" required>
+    <option value="">-- Select Course --</option>
+    <?php foreach($courses as $course): ?>
+      <option value="<?= $course->id ?>" 
+        <?= (isset($ccourse) && $ccourse->id == $course->id) ? 'selected' : '' ?>>
+        <?= $course->course_name ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+</div> 
+
+
     <div class="col-md-6 mb-3">
       <label>Quiz Title</label>
       <input type="text" class="form-control" name="title" value="<?= isset($quiz->title) ? $quiz->title : '' ?>" required>

@@ -10,6 +10,7 @@ class Quizadmin extends CI_Controller {
 			redirect('Login/index');
 		}
 		$this->load->model('Quiz_model'); // <-- Ye line zaroori hai
+		$this->load->model('Course_model'); // <-- Ye line zaroori hai
 
 	}
 
@@ -95,6 +96,8 @@ class Quizadmin extends CI_Controller {
 	public function editQuiz($id) {
 		// Get quiz details by ID
 		$quiz = $this->Quiz_model->getQuizById($id);
+		$course = $this->Course_model->get($quiz->course_id);
+		//print_r($course); die("Asdf");
 	
 		if (!$quiz) {
 			$this->session->set_flashdata('error', 'Quiz not found.');
@@ -104,7 +107,9 @@ class Quizadmin extends CI_Controller {
 		$data['quiz'] = $quiz;
 		$data['quiz_id'] = $quiz->id; // 'id' ho to use karo, ya quiz_id as per DB
 		$data['mode'] = 'edit';
-	
+		$data['ccourse'] = $course;
+		$data['courses']=$this->Course_model->get_all(); 
+
 		// Assuming the correct view for quiz editing
 		$this->load->view('administrator/create_quiz', $data);
 	}
@@ -153,7 +158,10 @@ class Quizadmin extends CI_Controller {
 		
 		public function addQuiz()
 		{
-			$this->load->view('administrator/create_quiz');
+			$data['courses']=$this->Course_model->get_all(); // get_all() returns list of course objects
+			// $data['quiz'] = $this->Quiz_model->get($id); // if editing
+			// $this->load->view('quiz_form', $data);
+			$this->load->view('administrator/create_quiz',$data);
 		}
 
 		public function addQues()
@@ -166,9 +174,9 @@ class Quizadmin extends CI_Controller {
 
 		public function listQuiz()
 		{
-			$data['quizzes'] = $this->Quiz_model->getAllQuizzes(); // model se quizzes fetch karo
-
-			$this->load->view('administrator/quizlist', $data); // quizzes ko view mein pass karo
+			// $data['quizzes'] = $this->Quiz_model->getAllQuizzes();  
+			$data['quizzes'] = $this->Quiz_model->getQuizCourse();
+			$this->load->view('administrator/quizlist', $data);  
 		}
 
 		public function listQues($quiz_id = 1)
@@ -202,6 +210,7 @@ class Quizadmin extends CI_Controller {
 				'title' => $this->input->post('title'),
 				'subtitle' => $this->input->post('subtitle'),
 				'duration_minutes' => $this->input->post('duration_minutes'),
+				'course_id' => $this->input->post('course_id'),
 			];
 		
 			$quiz_id = $this->input->post('id'); // edit mode me hidden id milega

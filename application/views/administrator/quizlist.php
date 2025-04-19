@@ -65,6 +65,7 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Course Title</th>
                     <th>Quiz Title</th>
                     <th>Subtitle</th>
                     <th>Duration (mins)</th>
@@ -76,6 +77,7 @@
                 <?php if($quizzes): $i = 1; foreach($quizzes as $quiz): ?>
                     <tr>
                         <td><?php echo $i++; ?></td>
+                        <td><?php echo $quiz->course_name; ?></td>
                         <td><?php echo $quiz->title; ?></td>
                         <td><?php echo $quiz->subtitle; ?></td>
                         <td><?php echo $quiz->duration_minutes; ?></td>

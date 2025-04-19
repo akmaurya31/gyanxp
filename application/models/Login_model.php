@@ -19,7 +19,6 @@
 			$this->db->order_by($orderBy, 'ASC');   
 			$query = $this->db->get();           
 			return $query->result(); 
-
     }
 
     public function getWhereAndStatus($tbl,$slug)

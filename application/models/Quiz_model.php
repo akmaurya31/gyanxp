@@ -81,4 +81,18 @@ class Quiz_model extends CI_Model {
         }
     }
 
+    public function get($id)
+    {
+        return $this->db->get_where('quizzes', ['id' => $id])->row();
+    }
+
+    public function getQuizCourse()
+    {
+        $this->db->select('quizzes.*, courses.course_name');
+        $this->db->from('quizzes');
+        $this->db->join('courses', 'courses.id = quizzes.course_id', 'left');
+        return $this->db->get()->result();
+    }
+
+
 }

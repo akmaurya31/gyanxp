@@ -101,6 +101,12 @@
                                   <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteConfirm<?php echo $li->id;?>">
                                     <i class="fa fa-trash"></i>
                                   </a>
+
+                                  <a href="listChapter/<?php echo $li->id;?>" class="btn btn-primary btn-sm" >
+                                    <i class="fa fa-check-square-o"></i>
+                                  </a>
+
+                                  
                                 </td>
                               </tr>
 

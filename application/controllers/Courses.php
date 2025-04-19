@@ -103,7 +103,65 @@ class Courses extends CI_Controller {
         }
     }
 
+    // public function listChapter() {
+    //     die("Asda");
+    
+    // }
 
+    public function listChapter($course_id = 1)
+    {
+        // Load chapters based on course_id
+        $data['chapters'] = $this->Course_model->getChaptersWithTopics($course_id); 
+        // Optional: if you want to use course_id in view
+       // print_r($data); die("Asdf");
+
+
+        $data['course_id'] = $course_id;
+        $data['pagination'] = $course_id;
+        // Load the view
+
+       // 
+
+        $this->load->view('administrator/listchapter', $data);
+    }
+
+
+    public function listtopic($chapter_id = 1)
+    {
+        $data['chapter'] = $this->Course_model->getTopic($chapter_id); 
+        $data['topics'] = $this->Course_model->mgetTopic($chapter_id); 
+        $this->load->view('administrator/listtopic', $data);
+    }
+    // getTopic
+
+    public function addNewChapter()
+    {
+        $this->load->view('administrator/addNewChapter');
+    }
+
+    public function ChapterCreate()
+    {
+        $this->form_validation->set_rules('course_id', 'Course ID', 'required|numeric');
+        $this->form_validation->set_rules('chapter_title', 'Chapter Title', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('order', 'Order', 'required|numeric');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('administrator/addNewChapter'); // View file ka naam
+        } else {
+            $data = [
+                'course_id' => $this->input->post('course_id'),
+                'chapter_title' => $this->input->post('chapter_title'),
+                'description' => $this->input->post('description'),
+                'order' => $this->input->post('order'),
+            ];
+            $this->db->insert('chapters', $data);
+            $this->session->set_flashdata('success', 'Chapter added successfully');
+            redirect('Courses/addNewChapter');
+        }
+    }
+    
+    
 
 
 }
