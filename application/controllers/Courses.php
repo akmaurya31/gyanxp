@@ -110,6 +110,8 @@ class Courses extends CI_Controller {
 
     public function listChapter($course_id = 1)
     {
+        // echo $course_id;
+        // die("ASdfas");
         // Load chapters based on course_id
         $data['chapters'] = $this->Course_model->getChaptersWithTopics($course_id); 
         // Optional: if you want to use course_id in view
@@ -134,9 +136,12 @@ class Courses extends CI_Controller {
     }
     // getTopic
 
-    public function addNewChapter()
+    public function addNewChapter($course_id = 1)
     {
-        $this->load->view('administrator/addNewChapter');
+        $data['course_id'] = $course_id;  
+        $data['fff'] = 1;  
+
+        $this->load->view('administrator/addNewChapter', $data);
     }
 
     public function ChapterCreate()
@@ -155,9 +160,11 @@ class Courses extends CI_Controller {
                 'description' => $this->input->post('description'),
                 'order' => $this->input->post('order'),
             ];
+            $ccourse_id=$this->input->post('course_id');
             $this->db->insert('chapters', $data);
             $this->session->set_flashdata('success', 'Chapter added successfully');
-            redirect('Courses/addNewChapter');
+            // redirect('Courses/addNewChapter/'.$ccourse_id);
+            redirect('Courses/listChapter/'.$ccourse_id);
         }
     }
     

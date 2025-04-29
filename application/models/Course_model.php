@@ -68,4 +68,9 @@ class Course_model extends CI_Model {
                         ->result();  // <-- Multiple rows return karega
     }
 
+    public function getCourseById($id)
+    {
+        return $this->db->get_where('chapters', ['id' => $id])->row();
+    }
+
 }

@@ -9,7 +9,7 @@
     <div class="right_col" role="main">
       <div class="container mt-4">
         <h2 class="mb-4">📚 Course Chapters 
-          <a href="<?= base_url('Courses/addNewChapter') ?>" class="btn btn-sm btn-success float-end">+ Add Chapter</a>
+          <a href="<?= base_url('Courses/addNewChapter/' . $course_id) ?>" class="btn btn-sm btn-success float-end L12">+ Add Chapter</a>
         </h2>
 
         <?php if (!empty($chapters)): ?>
@@ -29,9 +29,9 @@
                   <td>📘 <?= $chapter->chapter_title ?></td>
                   <td><?= $chapter->description ?></td>
                   <td>
-                    <a href="<?= base_url('Courses/listTopic/'.$chapter->id) ?>" class="btn btn-sm btn-info">View Topics</a>
-                    <a href="<?= base_url('Courses/chapters/edit/'.$chapter->id) ?>" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="<?= base_url('Courses/chapters/delete/'.$chapter->id) ?>" onclick="return confirm('Delete this chapter?')" class="btn btn-sm btn-danger">Delete</a>
+                    <!-- <a href="<?= base_url('Courses/listTopic/'.$chapter->id) ?>" class="btn btn-sm btn-info">View Topics</a> -->
+                    <a href="<?= base_url('Coursesadmin/chapteredit/'.$chapter->id) ?>" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="<?= base_url('Coursesadmin/chapterdelete/'.$chapter->id) ?>" onclick="return confirm('Delete this chapter?')" class="btn btn-sm btn-danger">Delete</a>
                   </td>
                 </tr>
               <?php endforeach; ?>

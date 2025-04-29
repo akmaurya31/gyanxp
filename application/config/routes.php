@@ -59,6 +59,10 @@ $route['publication']       = 'website/publication';
 $route['registration']      = 'website/registration';
 $route['quizresult']        = 'website/quizresult';
 
+// $route['course-details/(:any)']    = 'website/coursedetails';
+$route['course-details/(:any)'] = 'website/coursedetails/$1';
+$route['course-details/(:any)/(:any)'] = 'website/coursedetails/$1/$1';
+
 $route['userlogin']      	= 'website/userlogin';
 $route['research']       	= 'website/research';
 $route['for-individuals']   = 'website/for_individuals';

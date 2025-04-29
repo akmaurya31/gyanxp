@@ -1,4 +1,6 @@
 <?php include('header.php'); ?>
+
+ 
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
@@ -28,11 +30,12 @@
                             </div>
 
                             <div class="x_content">
-                                <form method="post" action="<?= base_url('Courses/ChapterCreate'); ?>">
+                                <form method="post" action="<?= base_url('Courses/ChapterCreate/'.$course_id); ?>">
                                     <div class="row form-group">
                                         <div class="col-md-6">
                                             <label for="course_id">Course ID</label>
-                                            <input type="text" name="course_id" class="form-control" value="<?= set_value('course_id') ?>">
+                                            <!-- <input type="text" name="course_id" class="form-control" value="<?= set_value('course_id') ?>"> -->
+                                            <input type="text" readonly name="course_id" class="form-control" value="<?=$course_id ?>">
                                             <?= form_error('course_id', '<div class="error">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-6">
@@ -45,7 +48,7 @@
                                     <div class="row form-group">
                                         <div class="col-md-12">
                                             <label for="description">Description</label>
-                                            <textarea name="description" class="form-control" rows="4"><?= set_value('description') ?></textarea>
+                                            <textarea name="description" class="form-control ckeditor" rows="4"><?= set_value('description') ?></textarea>
                                             <?= form_error('description', '<div class="error">', '</div>'); ?>
                                         </div>
                                     </div>
@@ -53,7 +56,7 @@
                                     <div class="row form-group">
                                         <div class="col-md-6">
                                             <label for="order">Order</label>
-                                            <input type="number" name="order" class="form-control" value="<?= set_value('order') ?>">
+                                            <input type="number" name="order" class="form-control" value="1">
                                             <?= form_error('order', '<div class="error">', '</div>'); ?>
                                         </div>
                                     </div>

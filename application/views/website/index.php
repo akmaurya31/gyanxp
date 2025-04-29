@@ -188,7 +188,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-center" style="margin-top: 20px;">
-                                        <a href="#" class="btn btn-warning">View Course</a>
+                                        <a href="course-details/<?php echo $course->id; ?>" class="btn btn-warning">View Course</a>
                                     </div>
                                 </div>
                             </div>
