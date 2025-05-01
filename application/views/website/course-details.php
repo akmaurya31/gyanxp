@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CCC FUll Course</title>
+    <title>  FUll Course</title>
 
     <!-- Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,14 @@
 
  
 
-        <div class="brand"><?php echo $course->course_name;?></div>
+        <div class="brand">
+
+        <a href="<?= base_url('course-details/' . $course->id ); ?>">
+                         <?php echo $course->course_name;?>
+                    </a>
+       
+    
+    </div>
         <button class="fa fa-bars fa-2x toggle-btn btn" type="button" data-bs-toggle="collapse"
             data-bs-target="#menu-content" aria-controls="menu-content" aria-expanded="false"
             aria-label="Toggle navigation"></button>

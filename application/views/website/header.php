@@ -32,6 +32,13 @@
     <link href="<?php echo base_url();?>assets/css/styles.css" rel="stylesheet" />
 
     <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" />
+    
+        <!-- ✅ Load jQuery First -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
 </head>
 
@@ -83,7 +90,8 @@
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
                                         <li><a href="<?php echo base_url();?>">Home</a></li>
-                                        <li><a href="<?php echo base_url('about-us');?>">About us</a></li>
+                                        <!-- <li><a href="<?php echo base_url('about-us');?>">About us</a></li> -->
+                                    
                                         
                                         <li><a href="#!">O Level</a>
                                             <ul>
@@ -99,7 +107,8 @@
                                         </li>
                                         <li><a href="<?php echo base_url('online-test');?>">Online Test</a></li>   
                                         <li><a href="<?php echo base_url('e-notes');?>">e-Notes</a></li>
-                                        <li><a href="<?php echo base_url('contact');?>">Contact</a></li>
+                                        <!-- <li><a href="<?php echo base_url('contact');?>">Contact</a></li> -->
+                                        <li><a href="<?php echo base_url('registration');?>">Registration</a></li>
                                     </ul>
                                     <!-- end menu area -->
 

@@ -60,6 +60,11 @@ class Website extends CI_Controller {
 	{
 		$this->load->view('website/registration');
 	}
+
+	public function compiler()
+	{
+		$this->load->view('website/compiler');
+	}
 	
 	public function userlogin()
 	{

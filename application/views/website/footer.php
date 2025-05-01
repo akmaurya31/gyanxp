@@ -3,9 +3,9 @@
         <footer class="bg-dark">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-lg-3 mb-2-5 mb-lg-0">
+                    <div class="col-md-6 col-lg-4 mb-2-5 mb-lg-0">
                         <a href="index.html" class="footer-logo">
-                            <img src="<?php echo base_url();?>assets/img/logos/footer-light-logo.png" class="mb-4" alt="Footer Logo">
+                            <img src="<?php echo base_url();?>assets/img/logos/logo.png" class="mb-4" alt="Footer Logo">
                         </a>
                         <p class="mb-1-6 text-white">
                             It's an ideal opportunity to begin investing your energy such that illuminates you.
@@ -41,7 +41,7 @@
 
                         </form>
                     </div>
-                    <div class="col-md-6 col-lg-2 mb-2-5 mb-lg-0">
+                    <div class="col-md-6 col-lg-4 mb-2-5 mb-lg-0">
                         <div class="ps-md-1-6 ps-lg-1-9">
                             <h3 class="text-primary h5 mb-2-2">About</h3>
                             <ul class="footer-list">
@@ -52,7 +52,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 mb-2-5 mb-md-0">
+                    <div class="col-md-6 col-lg-4 mb-2-5 mb-md-0">
                         <div class="ps-lg-1-9 ps-xl-2-5">
                             <h3 class="text-primary h5 mb-2-2">Link</h3>
                             <ul class="footer-list">
@@ -63,7 +63,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
+                    <!-- <div class="col-md-6 col-lg-4">
                         <div class="ps-md-1-9">
                             <h3 class="text-primary h5 mb-2-2">Popular Courses</h3>
                             <div class="media footer-border">
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="footer-bar text-center">
                     <p class="mb-0 text-white font-weight-500">&copy; <span class="current-year"></span> BoostingSkills Powered by <a href="#!" class="text-secondary">Boffin Web Technology</a></p>

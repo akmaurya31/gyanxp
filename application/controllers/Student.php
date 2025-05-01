@@ -8,7 +8,50 @@ public function __construct() {
     // $this->load->library('mail');
 }
 
-public function register() {
+public function register_user()
+{
+    $email = $this->input->post('email');
+
+    // Check if email already exists
+    $exists = $this->db->where('email', $email)->get('student_registration')->num_rows();
+
+    if ($exists > 0) {
+        $response = array(
+            'status'  => false,
+            'message' => 'Email already registered. Please use a different email.'
+        );
+    } else {
+        $data = array(
+            'name'       => $this->input->post('name'),
+            'email'      => $email,
+            'mobile'     => $this->input->post('phone'),
+            'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'created_at' => date('Y-m-d H:i:s')
+        );
+
+        $insert = $this->Student_model->save($data);
+
+        if ($insert) {
+            $response = array(
+                'status'  => true,
+                'message' => 'Registration successful!'
+            );
+        } else {
+            $response = array(
+                'status'  => false,
+                'message' => 'Something went wrong. Please try again.'
+            );
+        }
+    }
+
+    // Return JSON
+    $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
+}
+
+
+public function register222() {
     $data = array(
         'name'       => $this->input->post('name'),
         'email'      => $this->input->post('email'),
@@ -19,7 +62,8 @@ public function register() {
 
     $insert = $this->Student_model->save($data);
     if ($insert) {
-        echo "Registration successful, confirmation email sent.";
+        // echo "Registration successful, confirmation email sent.";
+        echo "Registration successful";
     }
 
     // if ($insert) {
