@@ -20,18 +20,18 @@
     <link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url();?>assets/img/logos/apple-touch-icon-114x114.png" />
 
     <!-- plugins -->
-    <link rel="stylesheet" href="assets/css/plugins.css" />
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/plugins.css" />
 
     <!-- search css -->
-    <link rel="stylesheet" href="assets/css/search.css" />
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/search.css" />
 
     <!-- quform css -->
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/base.css">
 
     <!-- core style css -->
-    <link href="assets/css/styles.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>assets/css/styles.css" rel="stylesheet" />
 
-    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" />
 
 </head>
 

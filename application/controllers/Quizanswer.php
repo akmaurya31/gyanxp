@@ -153,6 +153,7 @@ class Quizanswer extends CI_Controller {
 
 
 	public function get_quiz_meta($quiz_id=1) {
+		
 		$quiz_id = $this->session->userdata('quiz_id');
 		$quiz = $this->Quizans_model->get_quiz_by_id($quiz_id);
 		$total_questions = $this->Quizans_model->count_questions($quiz_id);

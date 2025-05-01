@@ -1,0 +1,44 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color:rgba(229, 231, 233, 0.3);
+}
+
+
+
+.div-left {
+    float: left;
+}
+
+.div-right {
+    float: right;
+}
+
+.button-b {
+    background-color: #3187ee;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.button-b:hover {
+    background-color: #ff7029;
+}
+
+.card {
+
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.card:hover {
+
+    box-shadow: none;
+
+}
+.text-bg{
+    background-color: #ffe2d4;
+}
+.icon-share{
+    float: right;
+}

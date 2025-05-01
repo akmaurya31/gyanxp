@@ -53,6 +53,10 @@
                             <div class="quform-submit-inner">
                                 <button class="butn secondary" type="submit"><i class="far fa-paper-plane icon-arrow before"></i><span class="label">Submit</span><i class="far fa-paper-plane icon-arrow after"></i></button>
                             </div>
+
+                            <p style="margin-top: 10px;">
+                                <b>Already registered?</b> <a href="userlogin" class="butn sub-title">Click here to Login</a>
+                            </p>
                                 <!-- End Submit button -->
 
                             </div>

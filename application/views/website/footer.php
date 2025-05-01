@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-3 mb-2-5 mb-lg-0">
                         <a href="index.html" class="footer-logo">
-                            <img src="assets/img/logos/footer-light-logo.png" class="mb-4" alt="Footer Logo">
+                            <img src="<?php echo base_url();?>assets/img/logos/footer-light-logo.png" class="mb-4" alt="Footer Logo">
                         </a>
                         <p class="mb-1-6 text-white">
                             It's an ideal opportunity to begin investing your energy such that illuminates you.
@@ -98,28 +98,28 @@
     <!-- end scroll to top -->
 
     <!-- jQuery -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
 
     <!-- popper js -->
-    <script src="assets/js/popper.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/popper.min.js"></script>
 
     <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 
     <!-- core.min.js -->
-    <script src="assets/js/core.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/core.min.js"></script>
 
     <!-- search -->
-    <script src="assets/js/search.js"></script>
+    <script src="<?php echo base_url();?>assets/js/search.js"></script>
 
     <!-- custom scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="<?php echo base_url();?>assets/js/main.js"></script>
 
     <!-- form plugins js -->
-    <script src="assets/js/plugins.js"></script>
+    <script src="<?php echo base_url();?>assets/js/plugins.js"></script>
 
     <!-- form scripts js -->
-    <script src="assets/js/scripts.js"></script>
+    <script src="<?php echo base_url();?>assets/js/scripts.js"></script>
 
     <!-- all js include end -->
     

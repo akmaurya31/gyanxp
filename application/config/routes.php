@@ -61,7 +61,12 @@ $route['quizresult']        = 'website/quizresult';
 
 // $route['course-details/(:any)']    = 'website/coursedetails';
 $route['course-details/(:any)'] = 'website/coursedetails/$1';
-$route['course-details/(:any)/(:any)'] = 'website/coursedetails/$1/$1';
+$route['course-details/(:any)/(:any)'] = 'website/coursedetails/$1/$2';
+$route['quizlist/(:any)'] = 'website/quizlist/$1';
+
+// $route['quiza/(:any)'] = 'website/quiza/$1';
+$route['quiza/(:any)'] = 'quiz/indexa/$1';
+$route['quiza'] = 'quiz/indexa';
 
 $route['userlogin']      	= 'website/userlogin';
 $route['research']       	= 'website/research';

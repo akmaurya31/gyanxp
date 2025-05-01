@@ -1,4 +1,4 @@
-<?php include('header.php');?>
+<?php include('headerquiz.php');?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
       .header-style1 {
@@ -230,6 +230,7 @@
 
 <script>
 let quizId = <?php echo ($this->session->userdata('quiz_id')) ? $this->session->userdata('quiz_id') : 1; ?>;
+// alert(quizId);
 
 let currentQuestion = 1;
 let totalQuestions = 0;
@@ -237,8 +238,8 @@ let timerMinutes = 0;
 let global_quesIds = []; 
 
 $(document).ready(function () {
-  $.post('Quizanswer/get_quiz_meta', { quiz_id: quizId }, function (data) {
-    let res = JSON.parse(data);
+  $.post('<?php echo base_url();?>/Quizanswer/get_quiz_meta', { quiz_id: quizId }, function (data) {
+    let res = JSON.parse(data); 
     totalQuestions = res.total_questions;
     timerMinutes = res.duration;
 
@@ -271,6 +272,7 @@ $(document).ready(function () {
     });
 
     let currentQuestion = (Array.isArray(quesIds) && quesIds.length > 0) ? quesIds[0] : 1; // fallback to 1
+    // alert(currentQuestion);
     loadQuestion(currentQuestion);
     $('#number-counter').html(html);
 
@@ -299,7 +301,7 @@ function loadQuestion(questionNumber) {
   let sqn= getCurrentIndexPlusOne(currentQuestionNumber)
   $('.sqn').text(sqn);
 
-  $.post('Quizanswer/get_question', {
+  $.post('<?php echo base_url();?>/Quizanswer/get_question', {
     quiz_id: quizId,
     question_number: questionNumber,
     user_id: user_id
@@ -371,7 +373,7 @@ function startTimer(duration) {
 
 $('input[name="xxans_option"]').change(function () {
   let selected = $(this).val();
-  $.post('Quizanswer/save_answer', {
+  $.post('<?php echo base_url();?>/Quizanswer/save_answer', {
     quiz_id: quizId,
     question_number: currentQuestion,
     selected_answer: selected
@@ -399,7 +401,7 @@ $(document).on('click', '#submit-button', function () {
   // }, 'json');
 
 
-  $.post('Quizanswer/save_answer', {
+  $.post('<?php echo base_url();?>/Quizanswer/save_answer', {
         quiz_id: quizId,
         question_number: currentQuestionNumber,
         selected_answer: selected
@@ -441,4 +443,4 @@ document.getElementById('finish-exam').addEventListener('click', function () {
 
 </script>
 
-<?php include('footer.php');?>
+<?php include('footerquiz.php');?>

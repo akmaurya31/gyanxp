@@ -9,6 +9,7 @@ class Website extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Quizans_model');
 		$this->load->model('Quiz_model');
+		$this->load->library('session');
 	}
 	
 	public function index()
@@ -39,8 +40,21 @@ class Website extends CI_Controller {
 
 	public function quiz()
 	{
+	 
 		$this->load->view('website/quiz');
 	}
+
+	public function quiza($id=null)
+	{
+		// $data[]
+		$user_id=$this->session->userdata('user_id');
+		if($user_id){
+			$this->load->view('website/quiz',$data);
+		}else{
+			$this->load->view('website/userlogin');
+		}
+	}
+	
 	
 	public function registration()
 	{
@@ -49,7 +63,15 @@ class Website extends CI_Controller {
 	
 	public function userlogin()
 	{
-		$this->load->view('website/userlogin');
+		$user_id = $this->session->userdata('user_id');
+		
+		if ($user_id) {
+			// Redirect to homepage (index method of Website controller)
+			redirect(base_url('website'));
+		} else {
+			// Load login view
+			$this->load->view('website/userlogin');
+		}
 	}
 	
 	public function quizresult()
@@ -104,7 +126,22 @@ class Website extends CI_Controller {
 		$this->load->view('website/course-details', $data);
 	}
 	
-	
+	public function quizlist($course_id = null)
+	{
+		$course = $this->db->get_where('courses', ['id' => $course_id])->row();
+
+		$quizzes = $this->db->get_where('quizzes', ['course_id' => $course_id])->result();
+
+		
+
+		// select answers where quiz_id 
+		// select questions  where  quiz_id 
+
+		$data['course'] = $course;
+		$data['quizzes'] = $quizzes;
+		$this->load->view('website/quizlist', $data);
+		
+	}
 
 	
 	
