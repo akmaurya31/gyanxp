@@ -102,3 +102,8 @@ $route['DetailPage/(:any)']    	= 'website/DetailPage/$1';
 $route['article/(:any)']    	= 'website/article/$1';
 
 $route['logout']    	= 'website/Logout';
+$route['enquiry/save']    	= 'student/EnquirySave';
+$route['updateProfile']    	= 'student/updateProfile';
+$route['update-profile-process'] = 'student/updateProfileProcess';
+$route['update-photo-process'] = 'student/updatePhotoProcess';
+$route['update-password-process'] = 'student/updatePasswordProcess';

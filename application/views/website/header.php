@@ -122,6 +122,9 @@ if(!empty($courses)){ foreach($courses as $course){?>
                                                     </a>
                                                 </li>
                                                 <li>
+                                                    <a href="<?php echo base_url('updateProfile'); ?>">Update Profile</a>
+                                                </li>
+                                                <li>
                                                     <a href="<?php echo base_url('logout'); ?>">Logout</a>
                                                 </li>
                                             <?php else: ?>

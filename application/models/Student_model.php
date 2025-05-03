@@ -10,4 +10,13 @@ public function getUserByEmail($email) {
     return $query->row(); // return single row as object
 }
 
+
+    public function insert_enquiry($data) {
+        return $this->db->insert('enquiries', $data);
+    }
+    public function getUserById($id) {
+        return $this->db->get_where('student_registration', ['id' => $id])->row_array();
+    }
+
+
 }

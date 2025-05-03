@@ -25,7 +25,7 @@ public function register_user()
             'name'       => $this->input->post('name'),
             'email'      => $email,
             'mobile'     => $this->input->post('phone'),
-            'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'password'   => $this->input->post('password'), //password_hash($this->input->post('password'), PASSWORD_DEFAULT),
             'created_at' => date('Y-m-d H:i:s')
         );
 
@@ -131,11 +131,135 @@ public function EnquirySave() {
         'message' => $this->input->post('message')
     );
 
-    $this->load->model('Enquiry_model');
-    $this->Enquiry_model->insert_enquiry($data);
+    $insert = $this->Student_model->insert_enquiry($data);
 
-    echo json_encode(['status' => 'success']);
+    
+    if ($insert) {
+        $response = array(
+            'status'  => true,
+            'message' => 'Registration successful!'
+        );
+    } else {
+        $response = array(
+            'status'  => false,
+            'message' => 'Something went wrong. Please try again.'
+        );
+    }
+
+    $this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($response));
+
+    // echo json_encode(['status' => true,'message'=>'Successfully Submit']);
 }
+
+public function updateProfile333() {
+    // $data['courses'] = $this->Course_model->get_all();
+    $data='';
+    $this->load->view('website/update-upload',$data);
+}
+
+public function updateProfile() {
+    // Load session and model
+    $this->load->library('session');
+    // Get user ID from session
+    $user_id = $this->session->userdata('user_id');
+
+    // Get user data from the model
+    $data['user'] = $this->Student_model->getUserById($user_id);
+
+    // Load the view and pass user data
+    $this->load->view('website/update-upload', $data);
+}
+
+
+public function updateProfileProcess() {
+    $id     = $this->input->post('id');
+    $name   = $this->input->post('name');
+    $email  = $this->input->post('email');
+    $mobile = $this->input->post('mobile');
+
+    $data = [
+        'name'   => $name,
+        'email'  => $email,
+        'mobile' => $mobile
+    ];
+
+    $this->db->where('id', $id);
+    $updte = $this->db->update('student_registration', $data);
+
+    if ($updte) {
+        $response = ['status' => true, 'message' => 'Profile updated successfully!'];
+    } else {
+        $response = ['status' => false, 'message' => 'Something went wrong. Please try again.'];
+    }
+
+    $this->output->set_content_type('application/json')->set_output(json_encode($response));
+}
+
+
+public function updatePhotoProcess() {
+    $id = $this->input->post('id');
+    if (!empty($_FILES['photo']['name'])) {
+        $config['upload_path']   = FCPATH .'uploads/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['file_name']     = time() . '_' . $_FILES['photo']['name'];
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('photo')) {
+            $uploadData = $this->upload->data();
+            $fileName = $uploadData['file_name'];
+
+            $this->db->where('id', $id);
+            $updte = $this->db->update('student_registration', ['photo_path' => $fileName]);
+
+            if ($updte) {
+                $response = ['status' => true, 'message' => 'Photo uploaded successfully!'];
+            } else {
+                $response = ['status' => false, 'message' => 'Failed to update photo path in DB.'];
+            }
+        } else {
+            $response = ['status' => false, 'message' => $this->upload->display_errors()];
+        }
+    } else {
+        $response = ['status' => false, 'message' => 'No file uploaded.'];
+    }
+
+    $this->output->set_content_type('application/json')->set_output(json_encode($response));
+}
+
+
+public function updatePasswordProcess() {
+    $id              = $this->input->post('id');
+    $old_password    = $this->input->post('old_password');
+    $new_password    = $this->input->post('new_password');
+    $confirm_password = $this->input->post('confirm_password');
+
+    // Fetch old password hash
+    $user = $this->db->get_where('student_registration', ['id' => $id])->row_array();
+
+    if (!$user) {
+        $response = ['status' => false, 'message' => 'User not found.'];
+    // } elseif (!password_verify($old_password, $user['password'])) {
+    } elseif ($old_password!=$user['password']) {
+        $response = ['status' => false, 'message' => 'Old password is incorrect.'];
+    } elseif ($new_password !== $confirm_password) {
+        $response = ['status' => false, 'message' => 'New password and confirm password do not match.'];
+    } else {
+        $hashed = $new_password;//password_hash($new_password, PASSWORD_BCRYPT);
+        $this->db->where('id', $id);
+        $updte = $this->db->update('student_registration', ['password' => $hashed]);
+
+        if ($updte) {
+            $response = ['status' => true, 'message' => 'Password changed successfully!'];
+        } else {
+            $response = ['status' => false, 'message' => 'Failed to update password.'];
+        }
+    }
+
+    $this->output->set_content_type('application/json')->set_output(json_encode($response));
+}
+
 
 
 

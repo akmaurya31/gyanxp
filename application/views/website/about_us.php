@@ -197,14 +197,14 @@
                     </div>
                     <div class="card-body p-1-9">
                        <form id="enquiryForm" class="contact quform" method="post" enctype="multipart/form-data">
-                            <div class="quform-elements">
+                            <div class="quform-elements1">
                                 <div class="row">
 
                                     <!-- Begin Text input element -->
                                     <div class="col-md-12">
                                         <div class="quform-element form-group">
                                             <div class="quform-input">
-                                                <input class="form-control" id="name" type="text" name="name" placeholder="Your name here*" />
+                                                <input class="form-control" id="name" type="text" name="name" placeholder="Your name here*" required />
                                             </div>
                                         </div>
                                     </div>
@@ -214,7 +214,7 @@
                                     <div class="col-md-12">
                                         <div class="quform-element form-group">
                                             <div class="quform-input">
-                                                <input class="form-control" id="email" type="text" name="email" placeholder="Your email here*" />
+                                                <input class="form-control" id="email" type="text" name="email" placeholder="Your email here*" required />
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +224,7 @@
                                     <div class="col-md-12">
                                         <div class="quform-element form-group">
                                             <div class="quform-input">
-                                                <input class="form-control" id="subject" type="text" name="subject" placeholder="Your subject here*" />
+                                                <input class="form-control" id="subject" type="text" name="subject" placeholder="Your subject here*" required />
                                             </div>
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@
                                     <div class="col-md-12">
                                         <div class="quform-element form-group">
                                             <div class="quform-input">
-                                                <input class="form-control" id="phone" type="text" name="phone" placeholder="Your phone here" />
+                                                <input class="form-control" id="phone" type="text" name="phone" placeholder="Your phone here" required />
                                             </div>
                                         </div>
                                     </div>
@@ -364,3 +364,30 @@
 </section>
 
 <?php include('footer.php');?>
+
+<script>
+$('#enquiryForm').submit(function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    $.ajax({
+        url: '<?php echo base_url("enquiry/save"); ?>',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            if (response.status) {
+                toastr.success(response.message);
+                $('#enquiryForm')[0].reset();
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function () {
+            toastr.error('Something went wrong!');
+        }
+    });
+});
+</script>
