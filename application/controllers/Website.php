@@ -30,7 +30,8 @@ class Website extends CI_Controller {
 	
 	public function about_us()
 	{
-		$this->load->view('website/about_us');
+		$data['courses'] = $this->db->get_where('courses', ['status' => 1])->result();
+		$this->load->view('website/about_us',$data);
 	}
 	
 	public function contact()

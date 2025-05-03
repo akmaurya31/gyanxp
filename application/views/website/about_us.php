@@ -1,5 +1,12 @@
 <?php include('header.php');?>
-
+<style>
+    .quform-error-message2 {
+        display: none !important;
+    }
+    .quform-error-title {
+        display: none  !important;
+    }
+</style>
 <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" data-background="<?php echo base_url()?>assets/img/bg/bg-04.jpg">
     <div class="container">
         <div class="row text-center">
@@ -224,7 +231,14 @@
                                     <div class="col-md-12">
                                         <div class="quform-element form-group">
                                             <div class="quform-input">
-                                                <input class="form-control" id="subject" type="text" name="subject" placeholder="Your subject here*" required />
+                                            <select class="form-control" id="subject" name="subject" required>
+                                                <option value="">Select Course*</option>
+                                                <?php foreach ($courses as $course): ?>
+                                                    <option value="<?= $course->course_name ?>">
+                                                        <?= $course->course_name ?> 
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
                                             </div>
                                         </div>
                                     </div>

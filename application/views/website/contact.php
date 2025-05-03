@@ -1,4 +1,12 @@
 <?php include('header.php');?>
+<style>
+    .quform-error-message2 {
+        display: none !important;
+    }
+    .quform-error-title {
+        display: none  !important;
+    }
+</style>
 <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" data-background="<?php echo base_url('assets/img/bg/bg-04.jpg');?>">
     <div class="container">
         <div class="row text-center">
@@ -75,11 +83,9 @@
             <div class="col-lg-6">
                 <div class="faq-form">
                     <h2 class="mb-4 text-primary">Get In Touch</h2>
-                    <form class="contact quform" action="quform/contact.php" method="post" enctype="multipart/form-data" onclick="">
+                    <form id="enquiryForm" class="contact quform" method="post" enctype="multipart/form-data">
                         <div class="quform-elements">
                             <div class="row">
-
-                                <!-- Begin Text input element -->
                                 <div class="col-md-6">
                                     <div class="quform-element form-group">
                                         <label for="name">Your Name <span class="quform-required">*</span></label>
@@ -88,9 +94,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Text input element -->
-
-                                <!-- Begin Text input element -->
                                 <div class="col-md-6">
                                     <div class="quform-element form-group">
                                         <label for="email">Your Email <span class="quform-required">*</span></label>
@@ -99,20 +102,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Text input element -->
-
-                                <!-- Begin Text input element -->
                                 <div class="col-md-6">
                                     <div class="quform-element form-group">
                                         <label for="subject">Your Subject <span class="quform-required">*</span></label>
                                         <div class="quform-input">
-                                            <input class="form-control" id="subject" type="text" name="subject" placeholder="Your subject here" />
+                                            <select class="form-control" id="subject" name="subject" required>
+                                                <option value="">Select Course*</option>
+                                                <?php foreach ($courses as $course): ?>
+                                                    <option value="<?= $course->course_name ?>">
+                                                        <?= $course->course_name ?> 
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Text input element -->
-
-                                <!-- Begin Text input element -->
                                 <div class="col-md-6">
                                     <div class="quform-element form-group">
                                         <label for="phone">Contact Number</label>
@@ -121,9 +125,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Text input element -->
-
-                                <!-- Begin Textarea element -->
                                 <div class="col-md-12">
                                     <div class="quform-element form-group">
                                         <label for="message">Message <span class="quform-required">*</span></label>
@@ -132,36 +133,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Textarea element -->
-
-                                <!-- Begin Captcha element -->
-                                <div class="col-md-12">
-                                    <div class="quform-element">
-                                        <div class="form-group">
-                                            <div class="quform-input">
-                                                <input class="form-control" id="type_the_word" type="text" name="type_the_word" placeholder="Type the below word" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="quform-captcha">
-                                                <div class="quform-captcha-inner">
-                                                    <img src="<?php echo base_url('assets/img/content/courier-new-light.png')?>" alt="...">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Captcha element -->
-
-                                <!-- Begin Submit button -->
                                 <div class="col-md-12">
                                     <div class="quform-submit-inner">
                                         <button class="butn secondary" type="submit"><i class="far fa-paper-plane icon-arrow before"></i><span class="label">Send Message</span><i class="far fa-paper-plane icon-arrow after"></i></button>
                                     </div>
                                     <div class="quform-loading-wrap text-start"><span class="quform-loading"></span></div>
                                 </div>
-                                <!-- End Submit button -->
-
                             </div>
                         </div>
                     </form>
@@ -172,3 +149,31 @@
 </section>
 
 <?php include('footer.php');?>
+
+
+<script>
+$('#enquiryForm').submit(function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    $.ajax({
+        url: '<?php echo base_url("enquiry/save"); ?>',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            if (response.status) {
+                toastr.success(response.message);
+                $('#enquiryForm')[0].reset();
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function () {
+            toastr.error('Something went wrong!');
+        }
+    });
+});
+</script>
