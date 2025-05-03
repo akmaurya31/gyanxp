@@ -48,10 +48,10 @@
                 <input type="text" name="name" value="<?= $user['name'] ?>" required class="form-control mb-2">
 
                 <label>Email</label>
-                <input type="email" name="email" value="<?= $user['email'] ?>" required class="form-control mb-2">
+                <input type="email" name="email" value="<?= $user['email'] ?>" required readonly class="form-control mb-2">
 
                 <label>Mobile</label>
-                <input type="text" name="mobile" value="<?= $user['mobile'] ?>" class="form-control mb-2">
+                <input type="text" name="mobile" value="<?= $user['mobile'] ?>" readonly class="form-control mb-2">
 
                 <button type="submit" name="update_profile" class="btn btn-primary mt-2">Update Profile</button>
             </form>

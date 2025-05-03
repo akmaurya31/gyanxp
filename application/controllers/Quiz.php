@@ -36,6 +36,10 @@ class Quiz extends CI_Controller {
         $data['questions'] = $this->Quiz_model->get_questions();
         $data['stuname'] = $this->session->userdata('name');
         $data['stuid'] = $this->session->userdata('user_id');
+
+        $this->load->model('Student_model');
+        $data['studentDetail'] = (object) $this->Student_model->getUserById($this->session->userdata('user_id'));
+
         // $this->session->userdata('quiz_id');
         // $data['quiz'] =  //7
         // $this->session->set_userdata('quiz_id', 7);

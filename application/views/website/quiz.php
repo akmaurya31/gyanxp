@@ -66,7 +66,12 @@
 </div>
 </div>
 <div class="profile-image">
-<img decoding="async" src="https://gyanxp.com/wp-content/plugins/sprinix/frontend/asset/image/profile-pic.png" alt="profile-image" width="100%" height="100%">
+  
+<!-- <img decoding="async" src="https://gyanxp.com/wp-content/plugins/sprinix/frontend/asset/image/profile-pic.png" alt="profile-image" width="100%" height="100%"> -->
+<?php //print_r($studentDetail); die("Asdfa"); ?>
+<img decoding="async" src="<?php echo base_url();?>uploads/<?php echo $studentDetail->photo_path;?>" alt="profile-image" width="100%" height="100%">
+
+
 </div>
 </div>
 <div class="left-container-top">

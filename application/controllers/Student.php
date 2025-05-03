@@ -197,13 +197,59 @@ public function updateProfileProcess() {
     $this->output->set_content_type('application/json')->set_output(json_encode($response));
 }
 
+public function updatePhotoProcess()
+{
+    $this->load->library('upload');
 
-public function updatePhotoProcess() {
+    $id = $this->input->post('id');
+
+    if (!empty($_FILES['photo']['name'])) {
+        // ✅ Fix: Use forward slashes `/` even on Windows, especially for web projects
+        $config['upload_path']   = FCPATH . 'uploads/registrations';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF';
+        $config['file_name']     = time() . '_' . $_FILES['photo']['name'];
+        $config['overwrite']     = TRUE;
+
+        // ✅ Create the directory if it doesn't exist
+        if (!is_dir($config['upload_path'])) {
+            mkdir($config['upload_path'], 0755, true);
+        }
+
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('photo')) {
+            $uploadData = $this->upload->data();
+            $fileName = $uploadData['file_name'];
+
+            $this->db->where('id', $id);
+            $updte = $this->db->update('student_registration', ['photo_path' => 'registrations/' . $fileName]);
+
+            if ($updte) {
+                $response = ['status' => true, 'message' => 'Photo uploaded successfully!'];
+            } else {
+                $response = ['status' => false, 'message' => 'Failed to update photo path in DB.'];
+            }
+        } else {
+            $response = ['status' => false, 'message' => strip_tags($this->upload->display_errors())];
+        }
+    } else {
+        $response = ['status' => false, 'message' => 'No file uploaded.'];
+    }
+
+    $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
+}
+
+
+
+public function updatePhotoProcess22() {
     $id = $this->input->post('id');
     if (!empty($_FILES['photo']['name'])) {
-        $config['upload_path']   = FCPATH .'uploads/';
-        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['upload_path']   = FCPATH .'uploads\registrations';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF';
         $config['file_name']     = time() . '_' . $_FILES['photo']['name'];
+        // print_r($config); die("ASdf");
         $this->load->library('upload', $config);
 
         if ($this->upload->do_upload('photo')) {

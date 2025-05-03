@@ -117,7 +117,7 @@ if(!empty($courses)){ foreach($courses as $course){?>
                                         <ul style="width: 150px;">
                                             <?php if ($this->session->userdata('name')): ?>
                                                 <li>
-                                                    <a href="<?php echo base_url('quiz'); ?>">
+                                                    <a href="<?php echo base_url(); ?>#quiz">
                                                         Hi, <?php echo $this->session->userdata('name'); ?>
                                                     </a>
                                                 </li>
