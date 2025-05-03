@@ -196,7 +196,7 @@
                         <h3 class="mb-0 text-white">Inquiry Now</h3>
                     </div>
                     <div class="card-body p-1-9">
-                        <form class="contact quform" action="quform/contact.php" method="post" enctype="multipart/form-data" onclick="">
+                       <form id="enquiryForm" class="contact quform" method="post" enctype="multipart/form-data">
                             <div class="quform-elements">
                                 <div class="row">
 
@@ -249,25 +249,6 @@
                                         </div>
                                     </div>
                                     <!-- End Textarea element -->
-
-                                    <!-- Begin Captcha element -->
-                                    <div class="col-md-12">
-                                        <div class="quform-element">
-                                            <div class="form-group">
-                                                <div class="quform-input">
-                                                    <input class="form-control" id="type_the_word" type="text" name="type_the_word" placeholder="Type the below word" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="quform-captcha">
-                                                    <div class="quform-captcha-inner">
-                                                        <img src="<?php echo base_url('assets/img/content/courier-new-light.png');?>" alt="...">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Captcha element -->
 
                                     <!-- Begin Submit button -->
                                     <div class="col-md-12">

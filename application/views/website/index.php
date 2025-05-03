@@ -66,7 +66,7 @@
 
         <!-- ONLINE COURSES
         ================================================== -->
-        <section class="bg-very-light-gray">
+        <section id="quiz" class="bg-very-light-gray">
             <div class="container">
                 <div class="section-heading">
                     <span class="sub-title">discover new</span>

@@ -82,35 +82,61 @@ public function register222() {
     // }
     }
 
-    public function loginUser() {
-        // Form se email aur password le rahe hain
-        $email    = $this->input->post('email');
-        $password = $this->input->post('password');
-    
-        // Model me user data check karne ke liye
-        // $this->load->model('User_model');
-        $user = $this->Student_model->getUserByEmail($email);
-    
-        if ($user) {
-            // Password match kar rahe hain (plain text ke liye, hash ho to password_verify use karo)
-            if ($user->password === $password) {
-                // Session me user data store
-                $this->session->set_userdata(array(
-                    'user_id' => $user->id,
-                    'name' => $user->name,
-                    'email'   => $user->email,
-                    'logged_in' => true
-                ));
-    
-                // Redirect ya response
-                echo "Login successful";
-            } else {
-                echo "Invalid Password";
-            }
+    public function loginUser()
+{
+    // Form se email aur password le rahe hain
+    $email    = $this->input->post('email');
+    $password = $this->input->post('password');
+
+    // Model load karke user fetch kar rahe hain
+    $user = $this->Student_model->getUserByEmail($email);
+
+    if ($user) {
+        // Password match (for plain text; use password_verify() if hashed)
+        if ($user->password === $password) {
+            // Session me user data store
+            $this->session->set_userdata(array(
+                'user_id'   => $user->id,
+                'name'      => $user->name,
+                'email'     => $user->email,
+                'logged_in' => true
+            ));
+
+            // JSON response for AJAX success
+            echo json_encode(array(
+                'status'  => true,
+                'message' => 'Login successful'
+            ));
         } else {
-            echo "User not found";
+            echo json_encode(array(
+                'status'  => false,
+                'message' => 'Invalid password'
+            ));
         }
+    } else {
+        echo json_encode(array(
+            'status'  => false,
+            'message' => 'User not found'
+        ));
     }
+}
+
+
+public function EnquirySave() {
+    $data = array(
+        'name'    => $this->input->post('name'),
+        'email'   => $this->input->post('email'),
+        'subject' => $this->input->post('subject'),
+        'phone'   => $this->input->post('phone'),
+        'message' => $this->input->post('message')
+    );
+
+    $this->load->model('Enquiry_model');
+    $this->Enquiry_model->insert_enquiry($data);
+
+    echo json_encode(['status' => 'success']);
+}
+
 
 
 

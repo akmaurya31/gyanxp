@@ -50,6 +50,8 @@
 <div>
 <label>Name:</label>
 <span id="quiz-user-name"><?php echo $stuname; ?></span>
+<br/>
+<span class="heading-text" style="font-size: 11px; color:green">Wait 30 Second</span>
 </div>
 </div>
 <div class="details">
@@ -356,11 +358,20 @@ $(document).on('click', '.qq', function () {
 
 
 function startTimer(duration) {
-  let timer = duration, minutes, seconds;
-  let interval = setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-    $('#remaining_time').text(minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
+    let timer = duration;
+
+    let interval = setInterval(function () {
+        let hours = Math.floor(timer / 3600);
+        let minutes = Math.floor((timer % 3600) / 60);
+        let seconds = timer % 60;
+
+        $('#remaining_time').text(
+            String(hours).padStart(2, '0') + ":" +
+            String(minutes).padStart(2, '0') + ":" +
+            String(seconds).padStart(2, '0')
+        );
+
+   // $('#remaining_time').text(minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 
     if (--timer < 0) {
       clearInterval(interval);

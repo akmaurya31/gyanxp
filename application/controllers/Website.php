@@ -148,6 +148,20 @@ class Website extends CI_Controller {
 		
 	}
 
+	public function logout()
+	{
+		// Destroy the session
+		$this->session->unset_userdata('name'); // remove specific user data
+		$this->session->sess_destroy(); // destroy entire session
+
+		// Optionally set a flash message
+		$this->session->set_flashdata('success', 'You have been logged out successfully.');
+
+		// Redirect to login page or homepage
+		redirect('userlogin');
+	}
+
+
 	
 	
 	

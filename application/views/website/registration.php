@@ -5,6 +5,10 @@
     display: none !important;
 }  
 
+.quform-error-message2{
+    display: none !important;
+}
+
 
 </style>
 <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" data-background="<?php echo base_url()?>assets/img/bg/bg-04.jpg">

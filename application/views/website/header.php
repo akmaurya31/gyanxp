@@ -111,8 +111,34 @@ if(!empty($courses)){ foreach($courses as $course){?>
                                             </ul>
                                         </li>
                                         <li><a href="<?php echo base_url('contact');?>">Contact</a></li>
-                                        <li><a href="<?php echo base_url('registration');?>">Registration</a></li>
-                                    </ul>
+
+                                        <li>
+                                        <a href="#!">User</a>
+                                        <ul style="width: 150px;">
+                                            <?php if ($this->session->userdata('name')): ?>
+                                                <li>
+                                                    <a href="<?php echo base_url('quiz'); ?>">
+                                                        Hi, <?php echo $this->session->userdata('name'); ?>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="<?php echo base_url('logout'); ?>">Logout</a>
+                                                </li>
+                                            <?php else: ?>
+                                                <li>
+                                                    <a href="<?php echo base_url('userlogin'); ?>">User Login</a>
+                                                </li>
+                                                <li>
+                                                    <a href="<?php echo base_url('registration'); ?>">Registration</a>
+                                                </li>
+                                            <?php endif; ?>
+                                        </ul>
+
+
+
+</ul>
+
+
                                     <!-- end menu area -->
 
                                     <!-- start attribute navigation -->

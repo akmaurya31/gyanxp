@@ -100,3 +100,5 @@ $route['city-nationwide-happiness-surveys']				= 'website/city_nationwide_happin
 $route['public-well-being-programs-scaling-impactful-happiness-initiatives'] = 'website/public_well_being_programs_scaling_impactful_happiness_initiatives';
 $route['DetailPage/(:any)']    	= 'website/DetailPage/$1';
 $route['article/(:any)']    	= 'website/article/$1';
+
+$route['logout']    	= 'website/Logout';
