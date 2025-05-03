@@ -17,7 +17,20 @@
 
     <!-- Your Custom CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/boost.css'); ?>">
+<style type="text/css">
+    body{
+        background-color: #f3f3f3;
+    }
+    .content {
+        padding: 10px 0px;
+        background-color: #f3f3f3;
+    }
+    .content_ccc {
+        background: #fff;
+        padding: 15px 15px;
+    }
 
+</style>
 </head>
 
 <body>
@@ -26,18 +39,10 @@
 
 
     <!-- Side Navigation -->
-    <nav class="nav-side-menu">
-
- 
-
+    <nav class="nav-side-menu hide-scrollbar">
         <div class="brand">
-
-        <a href="<?= base_url('course-details/' . $course->id ); ?>">
-                         <?php echo $course->course_name;?>
-                    </a>
-       
-    
-    </div>
+            <h5>Main Menu</h5>
+        </div>
         <button class="fa fa-bars fa-2x toggle-btn btn" type="button" data-bs-toggle="collapse"
             data-bs-target="#menu-content" aria-controls="menu-content" aria-expanded="false"
             aria-label="Toggle navigation"></button>
@@ -45,17 +50,16 @@
         <div class="menu-list">
             <div id="menu-content" class="menu-content collapse">
                 <ul class="list-unstyled">
-
-               
-                
-
                 <?php foreach($chapters as $chapter): ?>
                     <li>
                     <a href="<?= base_url('course-details/' . $chapter->course_id . '/' . $chapter->id); ?>">
-                        <?= $chapter->chapter_title; ?>
+                        <i class="fa fa-bars"></i> <?= $chapter->chapter_title; ?>
                     </a>
                     </li>
                 <?php endforeach; ?>
+                <li>
+                    <a href="<?php echo base_url();?>"><i class="fa fa-home"></i> Back to home</a>
+                </li>
                 </ul>
             </div>
         </div>
@@ -66,7 +70,6 @@
     <section class="content">
         <div class="container">
             <div class="content_ccc">
-
             <div class="content_detail">
 
             <?php
@@ -91,7 +94,7 @@ if ($chapter_id == '') {
                 foreach ($chapters as $chapter): 
                     if ($chapter->id == $chapter_id): 
                 ?>
-                    <h2><?= $chapter->chapter_title; ?></h2>
+                    <h3><?= $chapter->chapter_title; ?></h3>
                     <p><?= $chapter->description; ?></p>
                 <?php 
                     endif;

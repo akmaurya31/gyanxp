@@ -50,7 +50,7 @@
                             </div>
 
                             <p style="margin-top: 10px;">
-                                <b>Not registered?</b> <a href="registration" class="butn sub-title">Click here to register</a>
+                                <b>Not registered?</b> <a href="registration" class="sub-title">Click here to register</a>
                             </p>
 
                                 <!-- End Submit button -->

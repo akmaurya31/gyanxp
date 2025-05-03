@@ -69,7 +69,7 @@
         </div>
 
         <p style="margin-top: 10px;">
-            <b>Already registered?</b> <a href="userlogin" class="butn sub-title">Click here to Login</a>
+            <b>Already registered?</b> <a href="userlogin" class="sub-title">Click here to Login</a>
         </p>
     </div>
 </form>

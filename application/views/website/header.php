@@ -11,7 +11,7 @@
     <meta name="description" content="eLearn - Online Education Learning Template" />
 
     <!-- title  -->
-    <title>eLearn - Online Education Learning Template</title>
+    <title>Boosting Skills - Online Education Learning</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="<?php echo base_url();?>assets/img/logos/favicon.png" />
@@ -81,7 +81,7 @@
                                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                                     <div class="navbar-header navbar-header-custom">
                                         <!-- start logo -->
-                                        <a href="<?php echo base_url();?>" class="navbar-brand"><img id="logo" src="<?php echo base_url();?>assets/img/logos/logo-inner.png" alt="logo" /></a>
+                                        <a href="<?php echo base_url();?>" class="navbar-brand"><img id="logo" src="<?php echo base_url();?>assets/img/logos/logo.gif" alt="logo" /></a>
                                         <!-- end logo -->
                                     </div>
 
@@ -90,24 +90,27 @@
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
                                         <li><a href="<?php echo base_url();?>">Home</a></li>
-                                        <!-- <li><a href="<?php echo base_url('about-us');?>">About us</a></li> -->
+                                        <li><a href="<?php echo base_url('about-us');?>">About us</a></li>
                                     
                                         
-                                        <li><a href="#!">O Level</a>
-                                            <ul>
-                                                <li><a href="<?php echo base_url('o-level-study-material');?>">Study Material</a></li>
-                                                <li><a href="<?php echo base_url('o-level-quiz');?>">Quiz List</a></li>
+                                        <li>
+                                            <a href="#!">Courses</a>
+                                            <ul style="width: 150px;">
+
+<?php 
+$where              = array('status'=>'active');
+$id                 = 'position';
+$courses   = $this->login_model->getWhereAndOrderBy('courses',$where,$id);
+if(!empty($courses)){ foreach($courses as $course){?>
+    <li>
+        <a href="<?php echo base_url();?>course-details/<?php echo $course->id.'?='.$course->course_name; ?>">
+            <?php echo $course->course_name;?>
+        </a>
+    </li>
+<?php }}?>
                                             </ul>
                                         </li>
-                                        <li><a href="#!">CCC</a>
-                                            <ul>
-                                                <li><a href="<?php echo base_url('ccc-study-material');?>">Study Material</a></li>
-                                                <li><a href="<?php echo base_url('ccc-quiz');?>">Quiz List</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="<?php echo base_url('online-test');?>">Online Test</a></li>   
-                                        <li><a href="<?php echo base_url('e-notes');?>">e-Notes</a></li>
-                                        <!-- <li><a href="<?php echo base_url('contact');?>">Contact</a></li> -->
+                                        <li><a href="<?php echo base_url('contact');?>">Contact</a></li>
                                         <li><a href="<?php echo base_url('registration');?>">Registration</a></li>
                                     </ul>
                                     <!-- end menu area -->

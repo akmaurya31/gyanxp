@@ -5,41 +5,11 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-4 mb-2-5 mb-lg-0">
                         <a href="index.html" class="footer-logo">
-                            <img src="<?php echo base_url();?>assets/img/logos/logo.png" class="mb-4" alt="Footer Logo">
+                            <img src="<?php echo base_url();?>assets/img/logos/logo.gif" class="mb-4" alt="Footer Logo">
                         </a>
                         <p class="mb-1-6 text-white">
                             It's an ideal opportunity to begin investing your energy such that illuminates you.
                         </p>
-                        <form class="quform newsletter" action="quform/newsletter-two.php" method="post" enctype="multipart/form-data" onclick="">
-
-                            <div class="quform-elements">
-
-                                <div class="row">
-
-                                    <!-- Begin Text input element -->
-                                    <div class="col-md-12">
-                                        <div class="quform-element mb-0">
-                                            <div class="quform-input">
-                                                <input class="form-control" id="email_address" type="text" name="email_address" placeholder="Subscribe with us">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Text input element -->
-
-                                    <!-- Begin Submit button -->
-                                    <div class="col-md-12">
-                                        <div class="quform-submit-inner">
-                                            <button class="btn btn-white text-primary m-0 px-2" type="submit"><i class="fas fa-paper-plane"></i></button>
-                                        </div>
-                                        <div class="quform-loading-wrap text-start"><span class="quform-loading"></span></div>
-                                    </div>
-                                    <!-- End Submit button -->
-
-                                </div>
-
-                            </div>
-
-                        </form>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-2-5 mb-lg-0">
                         <div class="ps-md-1-6 ps-lg-1-9">
