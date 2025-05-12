@@ -123,15 +123,27 @@ class Website extends CI_Controller {
 	public function coursedetails($course_id = null, $chapter_id = null)
 	{
 		// Static SQL queries
-		$chapter_query = $this->db->query("SELECT * FROM chapters WHERE course_id = '$course_id' and subject_id='1'");
+		$chapter_query = $this->db->query("SELECT * FROM chapters WHERE course_id = '$course_id'");
 		$chapters = $chapter_query->result(); 
 
 		$course_query = $this->db->query("SELECT * FROM courses WHERE id = '$course_id'");
 		$course = $course_query->row();
 
+		$subject_id_query = $this->db->query("SELECT subject_id FROM chapters WHERE course_id = '$course_id'");
+		$subject_id = $subject_id_query->result(); 
+
+
+		$mysub_query = $this->db->query("SELECT * FROM subjects WHERE course_id = '$course_id'");
+	    $mysub = $mysub_query->result(); 
+
 		$data['course'] = $course;
 		$data['chapters'] = $chapters;
 		$data['chapter_id'] = $chapter_id;
+
+		$data['subject_id'] = $subject_id;
+		$data['mysub'] = $mysub;
+
+
 
 		$this->load->view('website/course-details', $data);
 	}

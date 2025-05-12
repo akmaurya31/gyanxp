@@ -35,8 +35,8 @@
 
 <body>
 
-<?php  //print_r($chapters); ?>
 
+ 
 
     <!-- Side Navigation -->
     <nav class="nav-side-menu hide-scrollbar">
@@ -47,25 +47,49 @@
             data-bs-target="#menu-content" aria-controls="menu-content" aria-expanded="false"
             aria-label="Toggle navigation"></button>
 
+
+
         <div class="menu-list">
             <div id="menu-content" class="menu-content collapse">
                 <ul class="list-unstyled">
-                <?php foreach($chapters as $chapter): ?>
-                    <li>
-                    <a href="<?= base_url('course-details/' . $chapter->course_id . '/' . $chapter->id); ?>">
-                        <i class="fa fa-bars"></i> <?= $chapter->chapter_title; ?>
-                    </a>
-                    </li>
-                <?php endforeach; ?>
+
+    
+  <?php if(!empty($mysub)){
+    foreach($mysub as $sub): ?>
+    <li>
+    <a href="<?= base_url('course-details/' . $sub->course_id . '/' . $sub->id); ?>">
+        <i class="fa fa-bars"></i> <?php // echo $sub->id; ?><?= $sub->title; ?>
+    </a>
+    </li>
+      <?php foreach($chapters as $chapter):
+        if($chapter->subject_id==$sub->id) { ?>
+            <li>
+            <a href="<?= base_url('course-details/' . $chapter->course_id . '/' . $chapter->id); ?>">
+                <i class="fa fa-bars"></i> <?php // echo $sub->id ?> <?= $chapter->chapter_title; ?>
+            </a>
+            </li>
+        <?php } ?>
+     <?php endforeach; ?>
+   <?php endforeach; } ?>
+
+
+      <?php foreach($chapters as $chapter): 
+         if($chapter->subject_id==null) { ?>
+        ?>
+        <li>
+        <a href="<?= base_url('course-details/' . $chapter->course_id . '/' . $chapter->id); ?>">
+            <i class="fa fa-bars"></i> <?php //echo $sub->id ?> <?= $chapter->chapter_title; ?>
+        </a>
+         </li>
+        <?php } endforeach; ?>
                 <li>
                     <a href="<?php echo base_url();?>"><i class="fa fa-home"></i> Back to home</a>
                 </li>
+
                 </ul>
             </div>
         </div>
     </nav>
-
-
     <!-- content  -->
     <section class="content">
         <div class="container">
