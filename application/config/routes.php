@@ -107,3 +107,5 @@ $route['updateProfile']    	= 'student/updateProfile';
 $route['update-profile-process'] = 'student/updateProfileProcess';
 $route['update-photo-process'] = 'student/updatePhotoProcess';
 $route['update-password-process'] = 'student/updatePasswordProcess';
+
+$route['subject'] = 'student/subjectAdd';

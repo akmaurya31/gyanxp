@@ -29,3 +29,13 @@ if (!function_exists('get_question_count_by_quiz_id')) {
         return $CI->db->count_all_results(); // Return total number of questions
     }
 }
+
+if (!function_exists('get_course_name')) {
+    function get_course_name($course_id) {
+        $CI =& get_instance(); // get CI instance
+        $CI->load->database(); // load database if not already loaded
+
+        $query = $CI->db->get_where('courses', ['id' => $course_id])->row();
+        return $query ? $query->course_name : 'N/A';
+    }
+}

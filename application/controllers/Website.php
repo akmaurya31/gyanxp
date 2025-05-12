@@ -108,30 +108,31 @@ class Website extends CI_Controller {
 		$this->load->view('website/quizresult', $data); // Pass $data here
 	}
 	
-	public function coursedetails($course_id = null,$chapter_id=null)
+	public function coursedetails22($course_id = null,$chapter_id=null)
 	{
-		// print_r($chapter_id); die("Asdfa");
 
 		$query = $this->db->get_where('chapters', ['course_id' => $course_id]);
 		$chapters = $query->result(); 
-
 		$course = $this->db->get_where('courses', ['id' => $course_id])->row();
+		$data['course'] = $course;
+		$data['chapters'] = $chapters;
+		$data['chapter_id'] = $chapter_id;
+		$this->load->view('website/course-details', $data);
+	}
 
-		// Chapter list fetch karo (ya specific chapter ke liye filter karo)
-		// $chapters = $this->db->get_where('chapters', ['course_id' => $course_id])->result();
-	
-		// Data pass karo view me
+	public function coursedetails($course_id = null, $chapter_id = null)
+	{
+		// Static SQL queries
+		$chapter_query = $this->db->query("SELECT * FROM chapters WHERE course_id = '$course_id' and subject_id='1'");
+		$chapters = $chapter_query->result(); 
+
+		$course_query = $this->db->query("SELECT * FROM courses WHERE id = '$course_id'");
+		$course = $course_query->row();
+
 		$data['course'] = $course;
 		$data['chapters'] = $chapters;
 		$data['chapter_id'] = $chapter_id;
 
-
-
-
-
-		// $data = [
-		// 	'chapters' => $chapters
-		// ];
 		$this->load->view('website/course-details', $data);
 	}
 	

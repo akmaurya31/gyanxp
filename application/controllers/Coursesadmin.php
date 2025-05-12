@@ -31,6 +31,12 @@ class Coursesadmin extends CI_Controller {
 			show_error('Course not found!');
 		}
 
+		$rscourse_id=$data['rs']->course_id;
+		$subject_query = $this->db->query("SELECT * FROM subjects where course_id=$rscourse_id");
+		$subjects = $subject_query->result(); 
+        $data['fff'] = 1;  
+        $data['subjects'] = $subjects;  
+
 		// print_r($data); die("Asdf");
 
 		$this->load->view('administrator/chapteredit', $data);
@@ -45,6 +51,7 @@ class Coursesadmin extends CI_Controller {
         $chapter_title = $this->input->post('chapter_title');
         $course_id    = $this->input->post('course_id');
         $description  = $this->input->post('description');
+        $subject_id  = $this->input->post('subject_id');
 
         // Step 2: Validate basic fields
         if (!$chapter_id || !$chapter_title) {
@@ -56,7 +63,8 @@ class Coursesadmin extends CI_Controller {
         // Step 3: Run update query (without model)
         $data = [
             'chapter_title' => $chapter_title,
-            'description'  => $description
+            'description'  => $description,
+            'subject_id'  => $subject_id,
         ];
 
         $this->db->where('id', $chapter_id);

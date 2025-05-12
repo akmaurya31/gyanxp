@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Courses extends CI_Controller {
+class Subjects extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -15,35 +15,51 @@ class Courses extends CI_Controller {
 
 	public function index()
 	{
-		$data['courses'] = $this->Course_model->get_all();
-		$this->load->view('administrator/ManageCoures',$data);
+		// $data['courses'] = $this->Course_model->get_all();
+     //   $subject_query  = $this->db->query("SELECT * FROM subjects");
+        $subject_query = $this->db->query("
+            SELECT 
+                subjects.*, 
+                courses.course_name
+            FROM subjects 
+            LEFT JOIN courses ON courses.id = subjects.course_id
+        "); 
+        $subjects = $subject_query->result();
+        $data['subjects']=$subjects;
+		$this->load->view('administrator/ManageSubjects',$data);
 	}
 
-	public function addNewCourse()
-	{
-		$this->load->view('administrator/addNewCourse');
-	}
+	public function addNewSubject()
+    {
+        // Fetch all courses from 'courses' table
+        $course_query = $this->db->query("SELECT * FROM courses");
+        $courses = $course_query->result();
+
+        // Send data to view
+        $data['courses'] = $courses;
+
+        // Load the view
+        $this->load->view('administrator/addNewSubject', $data);
+    }
+
 	public function EditNewCourse($id)
 	{
 		$data['course'] = $this->Course_model->get($id);
 		$this->load->view('administrator/EditNewCourse',$data);
 	}
 
-	public function create() {
-        $this->_set_validation();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->addNewCourse();
-        } else {
-            $data = $this->_get_post_data();
-            if ($_FILES['image']['name']) {
-                $data['image'] = $this->_upload_image();
-            }
-            $this->Course_model->insert($data);
-            $this->session->set_flashdata('success','Course Added!');
-            redirect('Courses/index');
-        }
+    public function create() {
+            $course_id =  $this->input->post('course_id');
+            $subject_name =  $this->input->post('subject_name');
+            $insert_data = array(
+                'course_id' => $course_id,  
+                'title'     => $subject_name,       
+            );
+            $this->db->insert('subjects', $insert_data);
+            $this->session->set_flashdata('success', 'Course Added!');
+            redirect('Subjects/index');
     }
+
 
     public function edit($id) {
         $data['course'] = $this->Course_model->get($id);
@@ -139,10 +155,8 @@ class Courses extends CI_Controller {
     public function addNewChapter($course_id = 1)
     {
         $data['course_id'] = $course_id;  
-        $subject_query = $this->db->query("SELECT * FROM subjects where course_id=$course_id");
-		$subjects = $subject_query->result(); 
         $data['fff'] = 1;  
-        $data['subjects'] = $subjects;  
+
         $this->load->view('administrator/addNewChapter', $data);
     }
 

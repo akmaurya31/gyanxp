@@ -32,7 +32,7 @@
                             <div class="x_content">
                                 <form method="post" action="<?= base_url('Courses/ChapterCreate/'.$course_id); ?>">
                                     <div class="row form-group">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 d-none">
                                             <label for="course_id">Course ID</label>
                                             <!-- <input type="text" name="course_id" class="form-control" value="<?= set_value('course_id') ?>"> -->
                                             <input type="text" readonly name="course_id" class="form-control" value="<?=$course_id ?>">
@@ -42,7 +42,24 @@
                                             <label for="chapter_title">Chapter Title</label>
                                             <input type="text" name="chapter_title" class="form-control" value="<?= set_value('chapter_title') ?>">
                                             <?= form_error('chapter_title', '<div class="error">', '</div>'); ?>
-                                        </div>
+                                            </div>
+
+                                    <div class="col-md-6">
+                                        <label for="">Subject Title</label>
+                                        <select name="subject_id" class="form-control">
+                                            <option value="">-- Select Subject --</option>
+                                            <?php if (!empty($subjects)) : ?>
+                                                <?php foreach ($subjects as $subject) : ?>
+                                                    <option value="<?= $subject->id ?>" <?= set_select('subject_id', $subject->id) ?>>
+                                                        <?= $subject->title ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </select>
+                                        <?= form_error('subject_id', '<div class="error">', '</div>'); ?>
+                                    </div>
+
+
                                     </div>
 
                                     <div class="row form-group">

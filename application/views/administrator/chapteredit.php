@@ -32,13 +32,29 @@
                             <div class="x_content">
                                 <form method="post" action="<?= base_url('Coursesadmin/UpdateChapter/'.$rs->course_id); ?>">
                                     <div class="row form-group">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 d-none">
                                             <label for="course_id">Course ID</label>
                                             <!-- <input type="text" name="course_id" class="form-control" value="<?= set_value('course_id') ?>"> -->
                                             <input type="text" readonly name="course_id" class="form-control" value="<?=$rs->course_id ?>">
                                             <?= form_error('course_id', '<div class="error">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-6">
+                                            <label for="">Subject Title</label>
+                                            <select name="subject_id" class="form-control">
+                                                <option value="">-- Select Subject --</option>
+                                                <?php if (!empty($subjects)) : ?>
+                                                    <?php foreach ($subjects as $subject) : ?>
+                                                        <option value="<?= $subject->id ?>"
+                                                            <?= set_select('subject_id', $subject->id, (isset($rs->subject_id) && $rs->subject_id == $subject->id)) ?>>
+                                                            <?= $subject->title ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            </select>
+                                            <?= form_error('subject_id', '<div class="error">', '</div>'); ?>
+                                        </div>
+
+                                        <div class="col-md-6 d-none">
                                             <label for="course_id">Chapter ID</label>
                                             <input type="text" readonly name="chapter_id" class="form-control" value="<?=$rs->id ?>">
                                             <?= form_error('chapter_id', '<div class="error">', '</div>'); ?>

@@ -58,7 +58,11 @@
                     </a>
                   </li>
 
-                 
+                  <li>
+                    <a href="<?php echo base_url();?>Subjects/index">
+                      <i class="fa fa-book"></i> Manage Subject
+                    </a>
+                  </li>
 
                   <li>
                     <a href="<?php echo base_url('Master/manageBlogs');?>">
