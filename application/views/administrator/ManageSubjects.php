@@ -55,8 +55,8 @@
 
                             <tr>
                               <th>#</th>
-                              <th>Course Name</th>
                               <th>Subject Name</th>
+                              <th>Course Name</th>
                               <th width="100">Action</th>
                             </tr>
                           </thead>
@@ -68,16 +68,18 @@
                             ?>
                               <tr>
                                 <td><?php echo $i;?></td>
-                                <td><?php echo $li->course_name;?></td>
+                           
                                 <td class="text-capitalize">
                                   <?php echo $li->title;?>
                                 </td>
+
+                                     <td style="width:350px" ><?php echo $li->course_name;?></td>
                                 
                                 <td>
-                                  <a href="<?php echo base_url('Courses/EditNewCourse/'.$li->id);?>" class="btn btn-success btn-sm">
+                                  <a href="<?php echo base_url('Subjects/EditNewSubject/'.$li->id);?>" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>
                                   </a>
-                                  <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteConfirm<?php echo $li->id;?>">
+                                  <a href="<?php echo base_url('Subjects/DeleteNewSubject/'.$li->id);?>" class="btn btn-danger btn-sm">
                                     <i class="fa fa-trash"></i>
                                   </a>
 

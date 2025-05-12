@@ -34,18 +34,24 @@ class Subjects extends CI_Controller {
         // Fetch all courses from 'courses' table
         $course_query = $this->db->query("SELECT * FROM courses");
         $courses = $course_query->result();
-
-        // Send data to view
         $data['courses'] = $courses;
 
         // Load the view
         $this->load->view('administrator/addNewSubject', $data);
     }
 
-	public function EditNewCourse($id)
+	public function EditNewSubject($id)
 	{
-		$data['course'] = $this->Course_model->get($id);
-		$this->load->view('administrator/EditNewCourse',$data);
+		// $data['course'] = $this->Course_model->get($id);
+         $course_query = $this->db->query("SELECT * FROM subjects where id='$id'");
+         $rs = $course_query->row();
+         $data['rs'] = $rs;
+
+            $course_query = $this->db->query("SELECT * FROM courses");
+            $courses = $course_query->result();
+            $data['courses'] = $courses;
+
+		$this->load->view('administrator/EditNewSubject',$data);
 	}
 
     public function create() {
@@ -58,6 +64,22 @@ class Subjects extends CI_Controller {
             $this->db->insert('subjects', $insert_data);
             $this->session->set_flashdata('success', 'Course Added!');
             redirect('Subjects/index');
+    }
+
+    public function Update() {
+        $subject_name = $this->input->post('subject_name');
+        $course_id = $this->input->post('course_id');
+        $id = $this->input->post('subid');
+        // Step 2: Raw SQL UPDATE query
+        $this->db->query("UPDATE subjects SET title = ?, course_id = ? WHERE id = ?", [
+            $subject_name,
+            $course_id,
+            $id
+        ]);
+        // Step 3: Optionally fetch updated row
+        $query = $this->db->query("SELECT * FROM subjects WHERE id = ?", [$id]);
+        $rs = $query->row();
+        redirect('Subjects/index');
     }
 
 
@@ -78,10 +100,13 @@ class Subjects extends CI_Controller {
         }
     }
 
-    public function delete($id) {
-        $this->Course_model->delete($id);
-        $this->session->set_flashdata('error','Row deleted!');
-        redirect('Courses/index');
+    public function DeleteNewSubject($id) {
+        // Step 1: Raw SQL DELETE query
+        $this->db->query("DELETE FROM subjects WHERE id = '$id'");
+        // Step 2: Flash message
+        $this->session->set_flashdata('success', 'Row deleted!');
+        // Step 3: Redirect to courses page
+        redirect('Subjects/index');
     }
 
     private function _set_validation() {
