@@ -89,11 +89,18 @@
 
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
-                                        <li><a href="<?php echo base_url();?>">Home</a></li>
-                                        <li><a href="<?php echo base_url('about-us');?>">About us</a></li>
+                                        <li><a href="<?php echo base_url();?>">Home</a></li>  
+
+                                        <li><a href="<?php echo base_url('about-us');?>">O level</a></li>
+                                        <li><a href="<?php echo base_url('about-us');?>">CCC</a></li>
+                                        <li><a href="<?php echo base_url('about-us');?>">Python</a></li>
+                                        <li><a href="<?php echo base_url('about-us');?>">Java</a></li>
+
+
+
                                     
                                         
-                                        <li>
+                                        <li class="d-none" >
                                             <a href="#!">Courses</a>
                                             <ul style="width: 150px;">
 
@@ -110,7 +117,11 @@ if(!empty($courses)){ foreach($courses as $course){?>
 <?php }}?>
                                             </ul>
                                         </li>
-                                        <li><a href="<?php echo base_url('contact');?>">Contact</a></li>
+
+                                        <li><a href="<?php echo base_url('about-us');?>">Quiz</a></li>
+
+
+                                        <!-- <li><a href="<?php echo base_url('contact');?>">Contact</a></li> -->
 
                                         <li>
                                         <a href="#!">User</a>

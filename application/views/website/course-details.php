@@ -75,6 +75,17 @@
             <?php
 $chapter_id = $this->uri->segment(3); ?> 
  <h2> <?php echo $course->course_name; ?> </h2>
+ 
+
+ <div>
+ <a href="http://localhost/boostingskills/compile-code" class="butn md btn btn">
+                                                    <i class="fas fa-brain icon-arrow before"></i>
+                                                    <span class="label">Compiler</span>
+                                                    <i class="fas fa-brain icon-arrow after"></i>
+                                                </a> </div>
+                                            
+                                           
+ 
 
  <?php 
 

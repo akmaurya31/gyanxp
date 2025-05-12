@@ -58,6 +58,8 @@
                     </a>
                   </li>
 
+                 
+
                   <li>
                     <a href="<?php echo base_url('Master/manageBlogs');?>">
                       <i class="fa fa-edit"></i>
