@@ -51,7 +51,7 @@
 <label>Name:</label>
 <span id="quiz-user-name"><?php echo $stuname; ?></span>
 <br/>
-<span class="heading-text" style="font-size: 11px; color:green">Wait 30 Second</span>
+<span class="heading-text" id="timer" style="font-size: 11px; color:green">Wait 30 Seconds</span>
 </div>
 </div>
 <div class="details">
@@ -141,7 +141,7 @@
 </div>
 <div class="submission-button">
 <div class="submit-button">
-<button type="button" id="submit-button" >Submit Answer</button>
+<button type="button" id="submit-button" disabled >Submit Answer</button>
 </div>
 <div class="reset-button">
 <button type="button" id="reset-button" disabled>Reset Answer</button>
@@ -171,7 +171,7 @@
 <div class="question-status">
 <span>Current</span>
 <span class="dot current"></span> 
-<span id="current-question-info">1</span>
+<span id="current-question-info1">1</span>
 </div>
 </div>
 <div class="choose-question">
@@ -245,7 +245,7 @@ let timerMinutes = 0;
 let global_quesIds = []; 
 
 $(document).ready(function () {
-  $.post('<?php echo base_url();?>/Quizanswer/get_quiz_meta', { quiz_id: quizId }, function (data) {
+  $.post('<?php echo base_url();?>Quizanswer/get_quiz_meta', { quiz_id: quizId }, function (data) {
     let res = JSON.parse(data); 
     totalQuestions = res.total_questions;
     timerMinutes = res.duration;
@@ -255,14 +255,15 @@ $(document).ready(function () {
     $('.total_mark').text(totalQuestions);
 
     $('#attempted-count').text(res.qanswer);
-    $('#not-attempted-count').text(parseInt(totalQuestions)-parseInt(res.qanswer));
-
-    startTimer(timerMinutes * 60); // Convert to seconds
-
+    let j=parseInt(totalQuestions)-parseInt(res.qanswer);
+    if(j<=-1){
+      j=0;
+    }
+    $('#not-attempted-count').text(j);
+    startTimerj(timerMinutes * 60); // Convert to seconds
 
     let quesIds = typeof res === 'string' ? JSON.parse(res.quesIds || res) : res.quesIds || res;
     let html = '';
-
 
     global_quesIds = (res.quesIds || []).sort((a, b) => a - b);
 
@@ -307,6 +308,7 @@ function loadQuestion(questionNumber) {
 
   let sqn= getCurrentIndexPlusOne(currentQuestionNumber)
   $('.sqn').text(sqn);
+  $('#current-question-info1').text(sqn);
 
   $.post('<?php echo base_url();?>/Quizanswer/get_question', {
     quiz_id: quizId,
@@ -349,6 +351,7 @@ $('#next-button').click(function () {
 
 
 $('.question-number').click(function () {
+  alert("ffff");
   currentQuestion = parseInt($(this).text());
   loadQuestion(currentQuestion);
 });
@@ -362,7 +365,7 @@ $(document).on('click', '.qq', function () {
 });
 
 
-function startTimer(duration) {
+function startTimerj(duration) {
     let timer = duration;
 
     let interval = setInterval(function () {
@@ -400,6 +403,7 @@ $('input[name="xxans_option"]').change(function () {
 
  
 $(document).on('click', '#submit-button', function () {
+  startTimerj();
   let selected = $('input[name="ans_option"]:checked').val(); // get selected radio
 
   if (!selected) {
@@ -423,12 +427,13 @@ $(document).on('click', '#submit-button', function () {
         selected_answer: selected
     }, function (response) {
         $('#attempted-count').html(response.attempted);
-        $('#not-attempted-count').html(response.not_attempted);
-
-        // Now load next question after saving answer
+        let c_not_attempted=response.not_attempted;
+        if(response.not_attempted<=-1){
+          c_not_attempted=0
+        }
+        $('#not-attempted-count').html(c_not_attempted);
         loadNextQuestion();
-    }, 'json');
-
+      }, 'json');
 
         function loadNextQuestion() {
           nextQuestionId=getNextQuestionId(currentQuestionNumber);
@@ -448,6 +453,7 @@ $(document).on('click', '#submit-button', function () {
           }
         }
 
+
       
 
 });
@@ -456,6 +462,33 @@ const baseUrl = "<?= base_url() ?>";
 document.getElementById('finish-exam').addEventListener('click', function () {
     window.location.href = baseUrl + 'quizresult';
 });
+
+
+
+    let countdown;
+    let timeLeft = 30;
+    function startTimerj() {
+       timeLeft = 30;
+      $('#submit-button').prop('disabled', true);
+      $('#timer').text(`Please wait ${timeLeft} seconds...`);
+
+      countdown = setInterval(() => {
+        timeLeft--;
+          console.log(timeLeft,"L478mm");
+        $('#timer').text(`Please wait ${timeLeft} seconds...`);
+
+        if (timeLeft <= 0) {
+          clearInterval(countdown);
+          console.log(timeLeft,"L483mm");
+          $('#timer').text("You can now submit your answer.");
+          $('#submit-button').prop('disabled', false);
+        }
+      }, 1000);
+    }
+
+    $(document).ready(function () {
+      startTimerj();
+    });
 
 </script>
 

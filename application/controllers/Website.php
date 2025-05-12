@@ -82,9 +82,12 @@ class Website extends CI_Controller {
 	
 	public function quizresult()
 	{
-		echo $quiz_id = 7;//$this->session->userdata('quiz_id');
-		echo $user_id = 7;//$this->session->userdata('user_id');
-		$this->session->set_userdata('quiz_id', 7);
+		//echo $quiz_id = 7;//$this->session->userdata('quiz_id');
+		//echo $user_id = 7;//$this->session->userdata('user_id');
+
+		$quiz_id =$this->session->userdata('quiz_id');
+		$user_id =$this->session->userdata('user_id');
+		$this->session->set_userdata('quiz_id', $quiz_id);
 
 		// Null check
 		if (!$quiz_id || !$user_id) {
