@@ -110,20 +110,25 @@ class Courses extends CI_Controller {
 
     public function listChapter($course_id = 1)
     {
-        // echo $course_id;
-        // die("ASdfas");
-        // Load chapters based on course_id
-        $data['chapters'] = $this->Course_model->getChaptersWithTopics($course_id); 
-        // Optional: if you want to use course_id in view
-       // print_r($data); die("Asdf");
+        //$data['chapters'] = $this->Course_model->getChaptersWithTopics($course_id); 
+        
+        $query = $this->db->query("
+            SELECT 
+                chapters.id as id,
+                chapters.id as chapter_id,
+                chapters.chapter_title as chapter_title,
+                chapters.description as description,
+                subjects.id as subject_id,
+                subjects.title as subject_title
+            FROM chapters
+            LEFT JOIN subjects ON chapters.subject_id = subjects.id
+            WHERE chapters.course_id = $course_id
+        ");
 
-
+       // return $query->result();
+        $data['chapters'] =  $query->result();
         $data['course_id'] = $course_id;
         $data['pagination'] = $course_id;
-        // Load the view
-
-       // 
-
         $this->load->view('administrator/listchapter', $data);
     }
 
@@ -153,6 +158,8 @@ class Courses extends CI_Controller {
         $this->form_validation->set_rules('description', 'Description', 'required');
         $this->form_validation->set_rules('order', 'Order', 'required|numeric');
 
+        
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('administrator/addNewChapter'); // View file ka naam
         } else {
@@ -161,6 +168,7 @@ class Courses extends CI_Controller {
                 'chapter_title' => $this->input->post('chapter_title'),
                 'description' => $this->input->post('description'),
                 'order' => $this->input->post('order'),
+                'subject_id' => $this->input->post('subject_id'),
             ];
             $ccourse_id=$this->input->post('course_id');
             $this->db->insert('chapters', $data);

@@ -39,7 +39,7 @@
                                             <?= form_error('course_id', '<div class="error">', '</div>'); ?>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="">Subject Title</label>
+                                            <label for="">Subject Title </label>
                                             <select name="subject_id" class="form-control">
                                                 <option value="">-- Select Subject --</option>
                                                 <?php if (!empty($subjects)) : ?>

@@ -18,6 +18,7 @@
               <tr>
                 <th>#</th>
                 <th>Chapter Title</th>
+                <th>Subject Title</th>
                 <th>Description</th>
                 <th>Actions</th>
               </tr>
@@ -27,6 +28,7 @@
                 <tr>
                   <td><?= $count++ ?></td>
                   <td>📘 <?= $chapter->chapter_title ?></td>
+                  <td>  <?= $chapter->subject_title ?> <?= $chapter->subject_id ?></td>
                   <td><?= $chapter->description ?></td>
                   <td>
                     <!-- <a href="<?= base_url('Courses/listTopic/'.$chapter->id) ?>" class="btn btn-sm btn-info">View Topics</a> -->
