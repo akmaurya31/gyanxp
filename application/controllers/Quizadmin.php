@@ -526,8 +526,9 @@ class Quizadmin extends CI_Controller {
 		  
 			$question = $this->Quiz_model->get_question_by_number($quiz_id, $question_number);
 			$user_id = $this->session->userdata('user_id');
-		  
+		    if($question->id){
 			$this->Quiz_model->save_user_answer($user_id, $quiz_id, $question->id, $selected_answer);
+			}
 		  }
 		  
 

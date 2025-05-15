@@ -69,7 +69,7 @@
   
 <!-- <img decoding="async" src="https://gyanxp.com/wp-content/plugins/sprinix/frontend/asset/image/profile-pic.png" alt="profile-image" width="100%" height="100%"> -->
 <?php //print_r($studentDetail); die("Asdfa"); ?>
-<img decoding="async" src="<?php echo base_url();?>uploads/<?php echo $studentDetail->photo_path;?>" alt="profile-image" width="100%" height="100%">
+<img decoding="async" src="<?php echo base_url();?>uploads/<?php //echo $studentDetail->photo_path;?>" alt="profile-image" width="100%" height="100%">
 
 
 </div>
@@ -240,7 +240,7 @@ let quizId = <?php echo ($this->session->userdata('quiz_id')) ? $this->session->
 // alert(quizId);
 
 let currentQuestion = 1;
-let totalQuestions = 0;
+var totalQuestions = 0;
 let timerMinutes = 0;
 let global_quesIds = []; 
 
@@ -254,6 +254,9 @@ $(document).ready(function () {
     $('.total_time').text(timerMinutes+" Minutes");
     $('.total_mark').text(totalQuestions);
 
+    if(res.qanswer>totalQuestions){
+      res.qanswer=totalQuestions;
+    } 
     $('#attempted-count').text(res.qanswer);
     let j=parseInt(totalQuestions)-parseInt(res.qanswer);
     if(j<=-1){
@@ -448,6 +451,10 @@ $(document).on('click', '#submit-button', function () {
         question_number: currentQuestionNumber,
         selected_answer: selected
     }, function (response) {
+        
+        if(response.attempted>totalQuestions){
+          response.attempted=totalQuestions;
+        } 
         $('#attempted-count').html(response.attempted);
         let c_not_attempted=response.not_attempted;
         if(response.not_attempted<=-1){
@@ -459,8 +466,8 @@ $(document).on('click', '#submit-button', function () {
 
         function loadNextQuestion() {
           nextQuestionId=getNextQuestionId(currentQuestionNumber);
+          $(`.question-number[data-id='${currentQuestionNumber}']`).addClass("attempted");
           $(".question-number").removeClass("current");  
-          $(".question-number").addClass("attempted");  
           $(`.question-number[data-id='${nextQuestionId}']`).addClass("current");
           loadQuestion(nextQuestionId); // Assuming loadQuestion is a function to load question content
         }
@@ -489,9 +496,9 @@ document.getElementById('finish-exam').addEventListener('click', function () {
 
 
     let countdown;
-    let timeLeft = 30;
+    let timeLeft = 3;
     function startTimerj() {
-       timeLeft = 30;
+       timeLeft = 3;
       $('#submit-button').prop('disabled', true);
       $('#timer').text(`Please wait ${timeLeft} seconds...`);
 
@@ -532,21 +539,6 @@ document.getElementById('finish-exam').addEventListener('click', function () {
 </style>
 
 <div id="rotate-warning">Please rotate your device to <strong>landscape mode</strong>.</div>
-
-<script>
-  function checkOrientation() {
-    alert("Asfaa");
-    if (window.innerHeight > window.innerWidth) {
-      // Portrait mode
-      document.getElementById("rotate-warning").style.display = "block";
-    } else {
-      // Landscape mode
-      document.getElementById("rotate-warning").style.display = "none";
-    }
-  }
-
-  window.addEventListener("resize", checkOrientation);
-  window.addEventListener("load", checkOrientation);
-</script>
+ 
 
 <?php include('footerquiz.php');?>

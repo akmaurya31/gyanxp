@@ -121,8 +121,10 @@ class Quizanswer extends CI_Controller {
 			$message = "Answer Updated Successfully";
 		} else {
 			// Not exists → Insert
+			if($question_id>0){
 			$data['created_at'] = $now;
 			$this->db->insert('answers', $data);
+			}
 			$message = "Answer Saved Successfully";
 		}
 	
