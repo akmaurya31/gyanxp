@@ -108,10 +108,10 @@
   
   </p>
 <div class="choice-option">
-    <div class="choice-answer" id="answer_A" style="display: flex;"><span id="option_a_en">(A) Red colouren</span>  <span id="option_a_hi">(A) Red colour</span></div>
-    <div class="choice-answer" id="answer_B" style="display: flex;"><span id="option_b_en">(B) Black colour</span>  <span id="option_b_hi">(B) Black colour</span></div>
-    <div class="choice-answer" id="answer_C" style="display: flex;"><span id="option_c_en">(C) Stricke through</span>  <span id="option_c_hi">(C) Stricke through</span></div>
-    <div class="choice-answer" id="answer_D" style="display: flex;"><span id="option_d_en">(D) Bold</span>  <span id="option_d_hi">(D) Bold</span></div>
+    <div class="choice-answer" id="answer_A" style="display: flex;">(A)<span id="option_a_en"> Red colouren</span> (A) <span id="option_a_hi"> Red colour</span></div>
+    <div class="choice-answer" id="answer_B" style="display: flex;">(B)<span id="option_b_en"> Black colour</span>  (B)<span id="option_b_hi"> Black colour</span></div>
+    <div class="choice-answer" id="answer_C" style="display: flex;">(C)<span id="option_c_en"> Stricke through</span> (C)  <span id="option_c_hi">Stricke through</span></div>
+    <div class="choice-answer" id="answer_D" style="display: flex;">(D)<span id="option_d_en"> Bold</span>  (D)<span id="option_d_hi"> Bold</span></div>
 </div>
 </form>
 </div>
@@ -144,7 +144,7 @@
 <button type="button" id="submit-button" disabled >Submit Answer</button>
 </div>
 <div class="reset-button">
-<button type="button" id="reset-button" disabled>Reset Answer</button>
+<button type="button" id="reset-button"  >Reset Answer</button>
 </div>
 </div>
 </div>            
@@ -261,6 +261,7 @@ $(document).ready(function () {
     }
     $('#not-attempted-count').text(j);
     startTimerj(timerMinutes * 60); // Convert to seconds
+    startTimerj_remaining(timerMinutes);
 
     let quesIds = typeof res === 'string' ? JSON.parse(res.quesIds || res) : res.quesIds || res;
     let html = '';
@@ -390,6 +391,27 @@ function startTimerj(duration) {
 }
 
 
+function startTimerj_remaining(duration1) {
+    let timer1 = duration1*60;
+    let interval1 = setInterval(function () {
+        let hours1 = Math.floor(timer1 / 3600);
+        let minutes1 = Math.floor((timer1 % 3600) / 60);
+        let seconds1 = timer1 % 60;
+        console.log(timer1,hours1,minutes1,seconds1,"ffff"); 
+        $('#remaining_time').text(
+            String(hours1).padStart(2, '0') + ":" +
+            String(minutes1).padStart(2, '0') + ":" +
+            String(seconds1).padStart(2, '0')
+        );
+    if (--timer1 < 0) {
+      clearInterval(interval1);
+      alert("Time's up!");
+    }
+  }, 1000);
+}
+
+
+
 $('input[name="xxans_option"]').change(function () {
   let selected = $(this).val();
   $.post('<?php echo base_url();?>/Quizanswer/save_answer', {
@@ -438,6 +460,7 @@ $(document).on('click', '#submit-button', function () {
         function loadNextQuestion() {
           nextQuestionId=getNextQuestionId(currentQuestionNumber);
           $(".question-number").removeClass("current");  
+          $(".question-number").addClass("attempted");  
           $(`.question-number[data-id='${nextQuestionId}']`).addClass("current");
           loadQuestion(nextQuestionId); // Assuming loadQuestion is a function to load question content
         }
@@ -486,10 +509,44 @@ document.getElementById('finish-exam').addEventListener('click', function () {
       }, 1000);
     }
 
-    $(document).ready(function () {
-      startTimerj();
+    $("#reset-button").click(function() {
+      $('input[name="ans_option"]').prop('checked', false);
     });
 
+</script>
+
+<style>
+  #rotate-warning {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    color: #fff;
+    z-index: 9999;
+    text-align: center;
+    padding-top: 40vh;
+    font-size: 20px;
+  }
+</style>
+
+<div id="rotate-warning">Please rotate your device to <strong>landscape mode</strong>.</div>
+
+<script>
+  function checkOrientation() {
+    alert("Asfaa");
+    if (window.innerHeight > window.innerWidth) {
+      // Portrait mode
+      document.getElementById("rotate-warning").style.display = "block";
+    } else {
+      // Landscape mode
+      document.getElementById("rotate-warning").style.display = "none";
+    }
+  }
+
+  window.addEventListener("resize", checkOrientation);
+  window.addEventListener("load", checkOrientation);
 </script>
 
 <?php include('footerquiz.php');?>

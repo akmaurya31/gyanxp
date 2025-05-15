@@ -5,13 +5,14 @@ class Quiz extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+         
         $this->load->model('Quiz_model');
         $this->load->library('session');
         $this->load->helper('url');
 
         if (!$this->session->userdata('logged_in')) {
             $this->session->set_flashdata('error', 'Please login to access the quiz');
-            redirect('login');
+            redirect('userlogin');
         }
     }
 
@@ -32,6 +33,7 @@ class Quiz extends CI_Controller {
 
     public function indexa($quizid=null) {
        // print_r($this->session->userdata()); 
+    
 
         $data['questions'] = $this->Quiz_model->get_questions();
         $data['stuname'] = $this->session->userdata('name');
