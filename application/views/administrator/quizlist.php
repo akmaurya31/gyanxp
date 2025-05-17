@@ -84,7 +84,7 @@
                         <td><?php echo $quiz->created_at; ?></td>
                         <td>
                             <a href="<?php echo base_url('Quizadmin/editQuiz/'.$quiz->id); ?>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                            <a href="<?php echo base_url('Quizadmin/delete/'.$quiz->id); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this quiz?')"><i class="fa fa-trash"></i></a>
+                            <a href="<?php echo base_url('Quizadmin/Qdelete/'.$quiz->id); ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                             <a href="<?php echo base_url('Quizadmin/listQues/'.$quiz->id); ?>" class="btn btn-sm btn-warning">Questions</a>
                         </td>
                     </tr>

@@ -114,9 +114,67 @@ class Quizadmin extends CI_Controller {
 		$this->load->view('administrator/create_quiz', $data);
 	}
 
+	public function up111loadFiles($FILES){
+			// Set upload path
+			$uploadPath = APPPATH . '../uploads/questions/'; // or manually set like below
+			$config['upload_path'] = $uploadPath;
+			$config['allowed_types'] = 'jpg|jpeg|png|gif';
+			// $config['max_size'] = 2048; // optional size limit in KB
+
+			// Create directory if it doesn't exist
+			if (!is_dir($config['upload_path'])) {
+				mkdir($config['upload_path'], 0755, true);
+			}
+
+			// Load upload library BEFORE using it
+			$this->load->library('upload', $config);
+
+			$image_name = '';
+			// Proceed only if file is selected
+			if (!empty($FILES['question_image']['name'])) {
+				if ($this->upload->do_upload('question_image')) {
+					$upload_data = $this->upload->data();
+					$image_name = $upload_data['file_name'];
+					echo "Image uploaded successfully: " . $image_name;
+				} else {
+					// Handle upload error
+					echo "Upload Path11: " . $config['upload_path'] . "<br>";
+					echo $this->upload->display_errors();
+				}
+			} else {
+				echo "No file selected.";
+			}
+			die("Asdf11"); // Debug line
+	}
+
+public function uploadFiles($FILES) {
+	// $config['upload_path'] = FCPATH . 'uploads/questions/';
+    $config['upload_path'] = './uploads/questions/';
+    $config['allowed_types'] = 'jpg|jpeg|png|webp|pdf|doc|docx|xls|xlsx';
+    // Create the directory if it doesn't exist
+    if (!is_dir($config['upload_path'])) {
+        mkdir($config['upload_path'], 0755, true);
+    }
+    $this->load->library('upload', $config);
+    $_FILES['question_image'] = array(
+        'name'     => $FILES['question_image']['name'],
+        'type'     => $FILES['question_image']['type'],
+        'tmp_name' => $FILES['question_image']['tmp_name'],
+        'error'    => $FILES['question_image']['error'],
+        'size'     => $FILES['question_image']['size']
+    );
+    // Proceed with upload
+    if (!$this->upload->do_upload('question_image')) {
+        // echo $this->upload->display_errors();
+    } else {
+        $data = $this->upload->data();
+        // echo "File uploaded: " . $data['file_name'];
+    }
+}
 
 	public function updateQues($id) {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			$this->uploadFiles($_FILES);
 			$data = [
 				'question_en'    => $this->input->post('question_en'),
 				'question_hi'    => $this->input->post('question_hi'),
@@ -129,13 +187,12 @@ class Quizadmin extends CI_Controller {
 				'option_d_en'    => $this->input->post('option_d_en'),
 				'option_d_hi'    => $this->input->post('option_d_hi'),
 				'correct_option' => $this->input->post('correct_option'),
+				'image'=>$_FILES['question_image']['name'],
 			];
-	
 			$this->load->model('Quiz_model');
 			$this->Quiz_model->updateQues($id, $data);
-	
 			$this->session->set_flashdata('success', 'Question updated successfully!');
-			redirect('Quizadmin/listQues');
+			redirect('Quizadmin/listQues/'.$this->session->userdata('quiz_id'));
 		} else {
 			$data['question'] = $this->Quiz_model->getQuestionById($id);
 			$this->load->view('administrator/edit_ques', $data);
@@ -531,8 +588,25 @@ class Quizadmin extends CI_Controller {
 			}
 		  }
 		  
+		public function Qdelete($id)
+		{
+			// Validate and sanitize ID
+			$id = intval($id);
 
+			// First delete dependent questions
+			$this->db->where('quiz_id', $id);
+			$this->db->delete('questions');
 
+			// Then delete the quiz
+			$this->db->where('id', $id);
+			$this->db->delete('quizzes');
+
+			// Set flash message
+			$this->session->set_flashdata('success', 'Quiz deleted successfully.');
+
+			// Redirect
+			redirect('Quizadmin/listQuiz');
+		}
 
 
 }

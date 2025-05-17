@@ -69,7 +69,7 @@
 
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Add Question</h2>
+                                <h2><?php echo $mode == 'edit' ? 'Edit' :'Save'; ?> Question</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
