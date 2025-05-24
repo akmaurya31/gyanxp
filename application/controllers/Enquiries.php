@@ -32,7 +32,7 @@ class Enquiries extends CI_Controller {
 
 	public function manageContactQuery()
 	{
-		$get          = $this->db->select('*')->from('contacts')->order_by('id','DESC')->get();
+		$get = $this->db->select('*')->from('enquiries')->order_by('id','DESC')->get();
         $data['list'] = $get->result();
 		$this->load->view('administrator/manageContactQuery',$data);
 	}

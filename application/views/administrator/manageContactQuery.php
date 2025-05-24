@@ -87,7 +87,7 @@
                                 	<?php echo $li->message;?>
                                 </td>
                                 <td>
-                                	<?php echo $li->enquiry_date;?>
+                                	<?php //echo $li->enquiry_date;?>
                                 </td>
                                 <td>
                                   <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteConfirm<?php echo $li->id;?>">

@@ -85,12 +85,12 @@
                     </a>
                   </li>
 
-                  <li>
+                  <!-- <li>
                     <a href="<?php echo base_url('Quizadmin/addQues');?>">
                       <i class="fa fa-edit"></i>
                       <span>Manage Question</span>
                     </a>
-                  </li>
+                  </li> -->
                   
                   <li>
                     <a href="<?php echo base_url('Coursesadmin/multiple_upload');?>">
