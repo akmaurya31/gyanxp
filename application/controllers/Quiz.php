@@ -5,7 +5,6 @@ class Quiz extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-         
         $this->load->model('Quiz_model');
         $this->load->library('session');
         $this->load->helper('url');
@@ -32,11 +31,9 @@ class Quiz extends CI_Controller {
     }
 
     public function indexa($quizid=null) {
-       // print_r($this->session->userdata()); 
         if ($this->session->userdata('quiz_reset')==1) {
             redirect(base_url()); // Agar direct aaya to home page
         }
-        
         $data['questions'] = $this->Quiz_model->get_questions();
         $data['stuname'] = $this->session->userdata('name');
         $data['stuid'] = $this->session->userdata('user_id');

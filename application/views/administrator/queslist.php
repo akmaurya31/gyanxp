@@ -81,7 +81,7 @@
                         <td><strong><?php echo strtoupper($q->correct_option); ?></strong></td>
                         <td>
                             <a href="<?php echo base_url('Quizadmin/editQues/'.$q->id); ?>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                            <a href="<?php echo base_url('Questionadmin/delete/'.$q->id); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this question?')"><i class="fa fa-trash"></i></a>
+                            <a href="<?php echo base_url('Quizadmin/deleteQues/'.$q->id); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this question?')"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; else: ?>

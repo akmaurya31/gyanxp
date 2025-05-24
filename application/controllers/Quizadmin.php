@@ -114,63 +114,6 @@ class Quizadmin extends CI_Controller {
 		$this->load->view('administrator/create_quiz', $data);
 	}
 
-	public function up111loadFiles($FILES){
-			// Set upload path
-			$uploadPath = APPPATH . '../uploads/questions/'; // or manually set like below
-			$config['upload_path'] = $uploadPath;
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			// $config['max_size'] = 2048; // optional size limit in KB
-
-			// Create directory if it doesn't exist
-			if (!is_dir($config['upload_path'])) {
-				mkdir($config['upload_path'], 0755, true);
-			}
-
-			// Load upload library BEFORE using it
-			$this->load->library('upload', $config);
-
-			$image_name = '';
-			// Proceed only if file is selected
-			if (!empty($FILES['question_image']['name'])) {
-				if ($this->upload->do_upload('question_image')) {
-					$upload_data = $this->upload->data();
-					$image_name = $upload_data['file_name'];
-					echo "Image uploaded successfully: " . $image_name;
-				} else {
-					// Handle upload error
-					echo "Upload Path11: " . $config['upload_path'] . "<br>";
-					echo $this->upload->display_errors();
-				}
-			} else {
-				echo "No file selected.";
-			}
-			die("Asdf11"); // Debug line
-	}
-
-public function uploadFiles($FILES) {
-	// $config['upload_path'] = FCPATH . 'uploads/questions/';
-    $config['upload_path'] = './uploads/questions/';
-    $config['allowed_types'] = 'jpg|jpeg|png|webp|pdf|doc|docx|xls|xlsx';
-    // Create the directory if it doesn't exist
-    if (!is_dir($config['upload_path'])) {
-        mkdir($config['upload_path'], 0755, true);
-    }
-    $this->load->library('upload', $config);
-    $_FILES['question_image'] = array(
-        'name'     => $FILES['question_image']['name'],
-        'type'     => $FILES['question_image']['type'],
-        'tmp_name' => $FILES['question_image']['tmp_name'],
-        'error'    => $FILES['question_image']['error'],
-        'size'     => $FILES['question_image']['size']
-    );
-    // Proceed with upload
-    if (!$this->upload->do_upload('question_image')) {
-        // echo $this->upload->display_errors();
-    } else {
-        $data = $this->upload->data();
-        // echo "File uploaded: " . $data['file_name'];
-    }
-}
 
 	public function updateQues($id) {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -187,7 +130,7 @@ public function uploadFiles($FILES) {
 				'option_d_en'    => $this->input->post('option_d_en'),
 				'option_d_hi'    => $this->input->post('option_d_hi'),
 				'correct_option' => $this->input->post('correct_option'),
-				'image'=>$_FILES['question_image']['name'],
+				'image'          => $_FILES['question_image']['name'],
 			];
 			$this->load->model('Quiz_model');
 			$this->Quiz_model->updateQues($id, $data);
@@ -308,15 +251,7 @@ public function uploadFiles($FILES) {
 			$this->load->model('Question_model');
 	
 			// File Upload Handling
-			$config['upload_path'] = './questions/';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$this->load->library('upload', $config);
-	
-			$image_name = '';
-			if ($this->upload->do_upload('image')) {
-				$upload_data = $this->upload->data();
-				$image_name = $upload_data['file_name'];
-			}
+			$this->uploadFiles($_FILES);
 	
 			$quiz_id = $this->session->userdata('quiz_id');
 			if (!$quiz_id) {
@@ -337,7 +272,7 @@ public function uploadFiles($FILES) {
 				'option_d_en'    => $this->input->post('option_d_en'),
 				'option_d_hi'    => $this->input->post('option_d_hi'),
 				'correct_option' => $this->input->post('correct_option'),
-				'image'          => $image_name,
+				'image'          => $_FILES['question_image']['name'],
 			];
 	
 			$this->Question_model->insert($data);
@@ -583,12 +518,38 @@ public function uploadFiles($FILES) {
 		  
 			$question = $this->Quiz_model->get_question_by_number($quiz_id, $question_number);
 			$user_id = $this->session->userdata('user_id');
-		    if($question->id){
+		  
 			$this->Quiz_model->save_user_answer($user_id, $quiz_id, $question->id, $selected_answer);
-			}
 		  }
 		  
-		public function Qdelete($id)
+		  public function uploadFiles($FILES) {
+        	$config['upload_path'] = FCPATH . 'uploads/questions';
+            //$config['upload_path'] = './uploads/questions/';
+            $config['allowed_types'] = 'jpg|jpeg|png|webp|pdf|doc|docx|xls|xlsx';
+            // Create the directory if it doesn't exist
+            if (!is_dir($config['upload_path'])) {
+                mkdir($config['upload_path'], 0755, true);
+            }
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            $_FILES['question_image'] = array(
+                'name'     => $FILES['question_image']['name'],
+                'type'     => $FILES['question_image']['type'],
+                'tmp_name' => $FILES['question_image']['tmp_name'],
+                'error'    => $FILES['question_image']['error'],
+                'size'     => $FILES['question_image']['size']
+            );
+            // Proceed with upload
+            if (!$this->upload->do_upload('question_image')) {
+                //echo $this->upload->display_errors();
+            } else {
+                $data = $this->upload->data();
+                //echo "File uploaded: " . $data['file_name'];
+                
+            }
+        }
+        
+        public function Qdelete($id)
 		{
 			// Validate and sanitize ID
 			$id = intval($id);
@@ -607,6 +568,20 @@ public function uploadFiles($FILES) {
 			// Redirect
 			redirect('Quizadmin/listQuiz');
 		}
+		 
+		public function deleteQues($id)
+		{
+			// Validate and sanitize ID
+			$ss = $this->db->query("SELECT * FROM questions where id=$id");
+		    $qs = $ss->row(); 
+			$id = intval($id);
+			$this->db->where('id', $id);
+			$this->db->delete('questions');
+			$this->session->set_flashdata('success', 'Question deleted successfully.');
+			redirect('Quizadmin/listQues/'.$qs->quiz_id);
+		}
+
+
 
 
 }

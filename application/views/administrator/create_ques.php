@@ -102,23 +102,23 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">विकल्प A (Hindi):</label>
-                <textarea class="form-control" name="option_a_hi" rows="3"><?php echo $mode == 'edit' ? $question->option_a_en: ''; ?></textarea>
+                <textarea class="form-control" name="option_a_hi" rows="3"><?php echo $mode == 'edit' ? $question->option_a_hi: ''; ?></textarea>
             </div>
 
             <!-- Options B -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Option B (English):</label>
-                <textarea class="form-control" name="option_b_en" rows="3"><?php echo $mode == 'edit' ? $question->option_a_en: ''; ?></textarea>
+                <textarea class="form-control" name="option_b_en" rows="3"><?php echo $mode == 'edit' ? $question->option_b_en: ''; ?></textarea>
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">विकल्प B (Hindi):</label>
-                <textarea class="form-control" name="option_b_hi" rows="3"><?php echo $mode == 'edit' ? $question->option_a_en: ''; ?></textarea>
+                <textarea class="form-control" name="option_b_hi" rows="3"><?php echo $mode == 'edit' ? $question->option_b_hi: ''; ?></textarea>
             </div>
 
             <!-- Options C -->
             <div class="col-md-6 mb-3">
                 <label class="form-label">Option C (English):</label>
-                <textarea class="form-control" name="option_c_en" rows="3"><?php echo $mode == 'edit' ? $question->option_a_en: ''; ?></textarea>
+                <textarea class="form-control" name="option_c_en" rows="3"><?php echo $mode == 'edit' ? $question->option_c_en: ''; ?></textarea>
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">विकल्प C (Hindi):</label>

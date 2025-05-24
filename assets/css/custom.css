@@ -148,7 +148,7 @@ object-fit: contain;
     color: #000;
 }
 .main-container .left-container .content .question-section form .choice-option .choice-answer {
-    align-items: center;
+    align-items: normal;
     display: flex;
     gap: 5px;
     justify-content: space-between;
@@ -168,13 +168,13 @@ object-fit: contain;
 .quiz-test .main-container .right-container .review button  {
         color: #FFF;
         font-size: calc(14px + (22 - 14) * ((100vw - 360px) / (1920 - 360)));
-        background: #2D9AFF;
+        background: #033dbc;
         padding:5px 0;
         text-align: center;
         cursor: pointer;
         width: 100%;
         margin: 0px;
-        border: 2px solid black;
+        border: 2px solid #033dbc;
        border-radius: 10px;
        font-weight: 600;
 }
@@ -195,6 +195,7 @@ object-fit: contain;
     text-align: center;
     font-size: calc(12px + (18 - 12) * ((100vw - 360px) / (1920 - 360)));
     border-top: 2px solid #000;
+    background:#fff;
 }
 .quiz-test .main-container .right-container .right-container-top .finish-exam .question-status {
     color: #000;
@@ -218,13 +219,13 @@ object-fit: contain;
     transform: translate(-30%, -50%);
 }
 .quiz-test .main-container .right-container .right-container-top .finish-exam {
-    background:#ededed;
+    background:#94a8ba!important;
     color: #000;
     font-weight: bold;
     line-height: normal;
 }
 .quiz-test .main-container .right-container .right-container-top .finish-exam .question-status .dot.not-attempt {
-    background: #F60000;
+    background: #dc3545;
 }
 .quiz-test .main-container .right-container .right-container-top .finish-exam .question-status .dot.attempt {
     background: #009E19;
@@ -241,6 +242,7 @@ object-fit: contain;
     text-align: center;
     border-top: 2px solid #000;
     font-weight: bold;
+    background: #fff;
 }
 .footer .select .submission-button {
     display: flex;
@@ -280,7 +282,7 @@ object-fit: contain;
     flex-direction: column;
     justify-content: space-between;
     border: 2px solid #000;
-    background: #ededed;
+    background: #94a8ba;
 }
 .main-container .right-container .total-question {
     display: grid;
@@ -288,6 +290,7 @@ object-fit: contain;
     gap: 4px;
     border-top: 2px solid #000; 
     padding-bottom: 20px;
+    padding-top: 10px;
 }
 .main-container .right-container .total-question .question-number {
     margin: auto;
@@ -525,7 +528,7 @@ color:#008D38;
 /* custom css */
 
 .main-container .right-container .total-question .question-number.current {
-    background-color: #fbb714;
+    background-color: #feff00;
 }
 .main-container .right-container .total-question .question-number.submitted {
     background-color:#009E19;;
@@ -615,4 +618,10 @@ color:#008D38;
 }
 html {
     user-select: none;
+}
+
+.attr-nav.align-items-xl-center.ms-xl-auto.main-font.fixed-btn {
+    position: fixed;
+    right: 0;
+    bottom: 0px;
 }

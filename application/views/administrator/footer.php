@@ -1,6 +1,6 @@
         <footer>
           <div class="pull-right">
-            Kurmi World <a href="#">Boffin Web Technology</a>
+            BS <a href="#">Boffin Web Technology</a>
           </div>
           <div class="clearfix"></div>
         </footer>

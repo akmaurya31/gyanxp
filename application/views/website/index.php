@@ -75,12 +75,11 @@
                 <div class="row g-xxl-5 mt-n2-6">
                     <?php if(!empty($courses)){ foreach($courses as $course){?>
                         <div class="col-md-6 col-xl-4 mt-2-6">
-                            <div class="card card-style1 p-0 h-100">
+                            <div class="card p-0 h-100">
                                 <div class="card-img rounded-0">
-                                    <div class="image-hover">
-                                        <img class="rounded-top" src="<?php echo base_url('uploads/courses/'.$course->image);?>" alt="...">
+                                    <div class="">
+                                        <img class="rounded-top" src="<?php echo base_url('uploads/courses/'.$course->image);?>" style="100%">
                                     </div>
-                                    <a href="#!"><i class="far fa-heart"></i></a>
                                 </div>
                                 <div class="card-body position-relative pt-0 px-1-9 pb-1-9">
                                     <div class="pt-3">

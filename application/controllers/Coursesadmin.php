@@ -84,8 +84,30 @@ class Coursesadmin extends CI_Controller {
     }
 }
 
+// 	public function chapterdelete($chapter_id = null)
+// 	{
+// 		// Chapter ID GET/POST se le lo
+// 		if ($chapter_id) {
+// 			// Delete query run karo
+// 			$this->db->where('id', $chapter_id);
+// 			$deleted = $this->db->delete('chapters');
+
+// 			if ($deleted) {
+// 				$this->session->set_flashdata('success', 'Chapter deleted successfully.');
+// 			} else {
+// 				$this->session->set_flashdata('error', 'Chapter deletion failed.');
+// 			}
+// 		} else {
+// 			$this->session->set_flashdata('error', 'Invalid chapter ID.');
+// 		}
+
+// 		redirect('Courses/listchapter'); // Yahan apni list wali page ka URL daal
+// 	}
+	
 	public function chapterdelete($chapter_id = null)
 	{
+		$ss = $this->db->query("SELECT * FROM chapters where id=$chapter_id");
+		$qs = $ss->row(); 
 		// Chapter ID GET/POST se le lo
 		if ($chapter_id) {
 			// Delete query run karo
@@ -101,7 +123,66 @@ class Coursesadmin extends CI_Controller {
 			$this->session->set_flashdata('error', 'Invalid chapter ID.');
 		}
 
-		redirect('Courses/listchapter'); // Yahan apni list wali page ka URL daal
+		redirect('Courses/listchapter/'.$qs->course_id); // Yahan apni list wali page ka URL daal
 	}
+	
+	function multiple_upload(){
+	    $data['images'] = $this->db->order_by('id', 'DESC')->get('media')->result();
+	    $this->load->view('administrator/multiple_upload',$data);
+	}
+	public function media_upload() {
+        $config['upload_path']   = './media/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['max_size']      = 2048;
+    
+        if (!is_dir($config['upload_path'])) {
+          mkdir($config['upload_path'], 0777, true);
+        }
+    
+        $this->load->library('upload');
+        $error = '';
+        $files = $_FILES['images'];
+        $count = count($files['name']);
+    
+        for ($i = 0; $i < $count; $i++) {
+          $_FILES['image']['name']     = $files['name'][$i];
+          $_FILES['image']['type']     = $files['type'][$i];
+          $_FILES['image']['tmp_name'] = $files['tmp_name'][$i];
+          $_FILES['image']['error']    = $files['error'][$i];
+          $_FILES['image']['size']     = $files['size'][$i];
+    
+          $this->upload->initialize($config);
+          if ($this->upload->do_upload('image')) {
+            $uploadData = $this->upload->data();
+            $fileName = $uploadData['file_name'];
+            $this->db->insert('media', ['file_name' => base_url().'media/'.$fileName]);
+          } else {
+            $error = $this->upload->display_errors();
+          }
+        }
+    
+        if ($error) {
+          $data['error'] = $error;
+        }
+    
+        $data['images'] = $this->db->order_by('id', 'DESC')->get('media')->result();
+    
+        redirect('Coursesadmin/multiple_upload');
+      }
+      public function deleteMedia($id) {
+          $query = $this->db->get_where('media', ['id' => $id]);
+          $image = $query->row();
+        
+          if ($image) {
+            $file_path = './media/' . $image->file_name;
+            if (file_exists($file_path)) {
+              unlink($file_path); // delete file
+            }
+        
+            $this->db->delete('media', ['id' => $id]); // delete DB record
+          }
+        
+          redirect('Coursesadmin/multiple_upload');
+        }
 
 }

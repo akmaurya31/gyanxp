@@ -29,7 +29,7 @@
                   <td><?= $count++ ?></td>
                   <td>📘 <?= $chapter->chapter_title ?></td>
                   <td>  <?= $chapter->subject_title ?> <?= $chapter->subject_id ?></td>
-                  <td><?= $chapter->description ?></td>
+               <td><?= substr(strip_tags($chapter->description), 0, 250) ?>...</td>
                   <td>
                     <!-- <a href="<?= base_url('Courses/listTopic/'.$chapter->id) ?>" class="btn btn-sm btn-info">View Topics</a> -->
                     <a href="<?= base_url('Coursesadmin/chapteredit/'.$chapter->id) ?>" class="btn btn-sm btn-warning">Edit</a>

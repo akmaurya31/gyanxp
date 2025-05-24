@@ -91,6 +91,13 @@
                       <span>Manage Question</span>
                     </a>
                   </li>
+                  
+                  <li>
+                    <a href="<?php echo base_url('Coursesadmin/multiple_upload');?>">
+                      <i class="fa fa-edit"></i>
+                      <span>Upload Media</span>
+                    </a>
+                  </li>
 
                   
 

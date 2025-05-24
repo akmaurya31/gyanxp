@@ -90,38 +90,14 @@
                                     <!-- start menu area -->
                                     <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
                                         <li><a href="<?php echo base_url();?>">Home</a></li>  
-
-                                        <li><a href="<?php echo base_url('about-us');?>">O level</a></li>
-                                        <li><a href="<?php echo base_url('about-us');?>">CCC</a></li>
-                                        <li><a href="<?php echo base_url('about-us');?>">Python</a></li>
-                                        <li><a href="<?php echo base_url('about-us');?>">Java</a></li>
-
-
-
-                                    
-                                        
-                                        <li class="d-none" >
-                                            <a href="#!">Courses</a>
-                                            <ul style="width: 150px;">
-
 <?php 
 $where              = array('status'=>'active');
 $id                 = 'position';
 $courses   = $this->login_model->getWhereAndOrderBy('courses',$where,$id);
 if(!empty($courses)){ foreach($courses as $course){?>
-    <li>
-        <a href="<?php echo base_url();?>course-details/<?php echo $course->id.'?='.$course->course_name; ?>">
-            <?php echo $course->course_name;?>
-        </a>
-    </li>
+   <li><a href="<?php echo base_url('course-details/'.$course->id.'?='.$course->course_name);?>"><?php echo $course->course_name;?></a></li>
 <?php }}?>
-                                            </ul>
-                                        </li>
 
-                                        <li><a href="<?php echo base_url('about-us');?>">Quiz</a></li>
-
-
-                                        <!-- <li><a href="<?php echo base_url('contact');?>">Contact</a></li> -->
 
                                         <li>
                                         <a href="#!">User</a>
@@ -166,24 +142,6 @@ if(!empty($courses)){ foreach($courses as $course){?>
                                                 </a>
                                             </li>
 
-                                            <?php /* if ($this->session->userdata('logged_in')): ?>
-                                             <li class="d-none d-xl-inline-block text-white">
-                                                Welcome, User ID: <?php echo $this->session->userdata('user_id'); ?>
-                                             </li>
-                                             <li class="d-none d-xl-inline-block">
-                                                    <a href="<?php echo base_url('logout');?>" class="butn md text-white">
-                                                        <i class="fas fa-sign-out-alt icon-arrow before"></i>
-                                                        <span class="label">Logout</span>
-                                                    </a>
-                                                </li>
-                                            <?php else: ?>
-                                                <li class="d-none d-xl-inline-block">
-                                                    <a href="<?php echo base_url('login');?>" class="butn md text-white">
-                                                        <i class="fas fa-sign-in-alt icon-arrow before"></i>
-                                                        <span class="label">Login</span>
-                                                    </a>
-                                                </li>
-                                            <?php endif;  */ ?>
                                         </ul>
                                     </div>
                                     <!-- end attribute navigation -->

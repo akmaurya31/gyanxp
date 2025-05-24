@@ -76,6 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
+	// 'username' => 'u695866225_boosstingSkill',
+	// 'password' => '=v5BAEXb7L',
+	// 'database' => 'u695866225_boosstingSkill',
 	'username' => 'root',
 	'password' => 'root@123',
 	'database' => 'boosting_skills',

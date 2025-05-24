@@ -13,9 +13,9 @@
         }
 
         /* When the question is both attempted and current (Yellow background) */
-        .attempted.current {
-            background-color: #fbb714 !important;
-            color: white !important;
+        .attempted.current, .dot.current {
+            background-color: #fff700 !important;
+            color: #000000 !important;
         }
 
       /* Red color for not-attempted questions */
@@ -27,19 +27,171 @@
       #finish-exam{
         cursor: pointer;
       }
+      .quiz{
+          padding: 5px;
+      }
+      .quiz .container-fluid{
+          padding: 5px;
+      }
+      
+      .right-container{
+            overflow: auto;
+            position: fixed;
+            top: 0;
+            right: 5px;
+            width: 24%;
+            height: 100%;
+            z-index: 1030;
+        }
+        
+        .left-container{
+            overflow: auto;
+            position: fixed!important;
+            top: 0;
+            left: 5px;
+            width: 75%;
+            height: 100%;
+            z-index: 1030;
+        }
+        .question span p {
+            margin-bottom: 0px;
+        }
+        input[type=radio] {
+            height: 16px;
+            width: 16px;
+        }
+    .details > div{
+            margin: 5px auto!important;
+    }
+    
+    .choice-answer{
+        align-items: baseline;
+    }
+    .question span p {
+        margin-bottom: 0px;
+        font-size: 18px;
+    }
+    
+    .question li, .question, .question span p{
+        font-family: 'Mulish', sans-serif;
+        font-size: 16px;
+    }
+    .choice-option{
+        gap: 5px!important;
+    }
+    .left-container .bg-quiz {
+        background-image: url(../../assets/img/background_logo.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-color: transparent;
+    }
+    .main-container .right-container .total-question .question-number.current {
+        background-color: #fff700;
+    }
+     .details label {
+        font-weight: 800;
+        margin-right: 10px;
+        font-size: 14px;
+        color: #000;
+    }
+    span#quiz-name, .details div span, .heading-text span {
+        font-size: 14px;
+    }
+    .finish-exam-disabled{
+        border-radius: 0px!important;
+        border:none!important;
+    }
+    .main-container .right-container {
+        background: #94a8ba;
+    }
+    .choose-question{
+        background:#fff;
+    }
+    .text{
+        font-weight: 800!important;
+    }
+    
+    
+    @media (max-width: 767px) {
+        .quiz-test .main-container .left-container .banner {
+            gap: 5px !important;
+        }
+        .main-container .left-container .banner .logo,
+        .main-container .left-container .banner .profile-image {
+            width: 60px!important;
+            min-width: 60px!important;
+        }
+        .quiz-test .main-container .left-container .banner .exam-details {
+            gap: 0px;
+        }
+        .details > div {
+            margin: 0px auto !important;
+        }
+        .details label{
+            font-size: 11px;
+        }
+        span#quiz-name, .details div span, .heading-text span {
+            font-size: 11px;
+        }
+        .main-container .left-container .heading .heading-text{
+            padding: 2px 5px;
+        }
+        .main-container .left-container .content .question-section{
+            gap: 0px;
+            padding: 0 5px;
+        }
+        .main-container .left-container .content .question-section .question {
+            color: #000;
+            font-family: Hind;
+            font-size: 12px !important;
+            font-weight: 500;
+            margin: 5px 0 5px;
+            display: flex;
+            gap: 5px;
+        }
+        .question span p {
+            font-family: 'Mulish', sans-serif;
+            font-size: 12px;
+        }
+        .question li, .question, .question span p{
+            font-family: 'Mulish', sans-serif;
+            font-size: 12px;
+        }
+        .choice-option {
+            gap: 0px !important;
+            font-size: 12px;
+        }
+        .choice-answer-check input{
+            width: 14px;
+            height: 14px;
+        }
+        .choice-answer-check span{
+            font-size:12px;
+        }
+        .exam-status, .question-status, .choose-question{
+            font-size:12px!important;
+        }
+        .main-container .right-container .total-question {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        .quiz-test .main-container .right-container .right-container-top .finish-exam .question-status .dot{
+            right: 14%;
+        }
+    }
 
 
 </style>
-<section>
-<div class="container">
+<section class="quiz">
+<div class="container-fluid">
 <div class="quiz-test">
 <button type="button" id="myBtn" style="display:none;"></button>
 <div class="main-container">
 <div class="left-container">
-<div>
+<div class="bg-quiz">
 <div class="banner">
 <div class="logo">
-<img decoding="async" src="https://gyanxp.com/wp-content/plugins/sprinix/admin/asset/images/upload/banner/6659f5d63b8a3.png" alt="banner" >
+<img decoding="async" src="<?php echo base_url('assets/img/nielet_logo.webp');?>" alt="banner" >
 </div>
 <div class="exam-details">
 <div class="details">
@@ -61,15 +213,18 @@
 </div>
 <div>
 <label>Language:</label>
-<span>HINDI/ENGLISH</span>
+<span>Hindi/English</span>
 </div>   
 </div>
 </div>
 <div class="profile-image">
   
-<!-- <img decoding="async" src="https://gyanxp.com/wp-content/plugins/sprinix/frontend/asset/image/profile-pic.png" alt="profile-image" width="100%" height="100%"> -->
-<?php //print_r($studentDetail); die("Asdfa"); ?>
-<img decoding="async" src="<?php echo base_url();?>uploads/<?php //echo $studentDetail->photo_path;?>" alt="profile-image" width="100%" height="100%">
+
+<?php if(!empty($studentDetail->photo_path)){ ?>
+    <img decoding="async" src="<?php echo base_url();?>uploads/<?php echo $studentDetail->photo_path;?>" alt="profile-image" width="100%" height="100%">
+<?php }else{?>
+    <img decoding="async" src="https://gyanxp.com/wp-content/plugins/sprinix/frontend/asset/image/profile-pic.png" alt="profile-image" width="100%" height="100%">
+<?php }?>
 
 
 </div>
@@ -77,7 +232,7 @@
 <div class="left-container-top">
 <div class="heading">
 <div class="heading-text">
-<span class="text">QN.</span> <span class="number sqn" id="current-question-info">1</span>
+<span class="text">QN. </span> <span class="number sqn" id="current-question-info">1</span>
 </div>
 <div class="heading-text">
 <span class="text">Total Marks: </span>
@@ -88,12 +243,12 @@
 <span class="number total_time"> 90 Minutes </span>
 </div>
 <div class="heading-text">
-<span class="text">Remaining Time:</span>
+<span class="text">Remaining Time: </span>
 <span class="number left-time" id="remaining_time"> 00:00:00</span>
 </div>
 
 <div class="heading-text">
-<span class="text">Mark:</span>
+<span class="text">Mark: </span>
 <span class="number"> 1 </span>
 </div>
 </div>
@@ -103,15 +258,14 @@
 <div class="hindi-question">
 <form action="#">
 <p class="question" id="question">
-  <span class="qhi" lang="hi">elernent उस टेक्स्ट को परिभाषित करता है जिसे किसी दस्तावेज़ से हटा दिया गया है। ब्राउज़र उन्हें _________ रूप में प्रदर्शित करता है</span> 
-   <span  class="qen" lang="en">elernent defines text that has been deleted from a document. Browser display them as</span>
-  
-  </p>
+  <span class="qhi" lang="hi"></span> 
+   <span  class="qen" lang="en"></span>
+</p>
 <div class="choice-option">
-    <div class="choice-answer" id="answer_A" style="display: flex;">(A)<span id="option_a_en"> Red colouren</span> (A) <span id="option_a_hi"> Red colour</span></div>
-    <div class="choice-answer" id="answer_B" style="display: flex;">(B)<span id="option_b_en"> Black colour</span>  (B)<span id="option_b_hi"> Black colour</span></div>
-    <div class="choice-answer" id="answer_C" style="display: flex;">(C)<span id="option_c_en"> Stricke through</span> (C)  <span id="option_c_hi">Stricke through</span></div>
-    <div class="choice-answer" id="answer_D" style="display: flex;">(D)<span id="option_d_en"> Bold</span>  (D)<span id="option_d_hi"> Bold</span></div>
+    <div class="choice-answer" id="answer_A" style="display: flex;">(A) <span id="option_a_en"> </span>  (A) <span id="option_a_hi"></span></div>
+    <div class="choice-answer" id="answer_B" style="display: flex;">(B) <span id="option_b_en"></span>  (B) <span id="option_b_hi"></span></div>
+    <div class="choice-answer" id="answer_C" style="display: flex;">(C) <span id="option_c_en"></span> (C) <span id="option_c_hi"></span></div>
+    <div class="choice-answer" id="answer_D" style="display: flex;">(D) <span id="option_d_en"></span>  (D) <span id="option_d_hi"></span></div>
 </div>
 </form>
 </div>
@@ -144,7 +298,7 @@
 <button type="button" id="submit-button" disabled >Submit Answer</button>
 </div>
 <div class="reset-button">
-<button type="button" id="reset-button"  >Reset Answer</button>
+<button type="button" id="reset-button">Reset Answer</button>
 </div>
 </div>
 </div>            
@@ -253,10 +407,10 @@ $(document).ready(function () {
     $('.sqn').text(1);
     $('.total_time').text(timerMinutes+" Minutes");
     $('.total_mark').text(totalQuestions);
-
     if(res.qanswer>totalQuestions){
       res.qanswer=totalQuestions;
-    } 
+    }
+
     $('#attempted-count').text(res.qanswer);
     let j=parseInt(totalQuestions)-parseInt(res.qanswer);
     if(j<=-1){
@@ -394,27 +548,6 @@ function startTimerj(duration) {
 }
 
 
-function startTimerj_remaining(duration1) {
-    let timer1 = duration1*60;
-    let interval1 = setInterval(function () {
-        let hours1 = Math.floor(timer1 / 3600);
-        let minutes1 = Math.floor((timer1 % 3600) / 60);
-        let seconds1 = timer1 % 60;
-        console.log(timer1,hours1,minutes1,seconds1,"ffff"); 
-        $('#remaining_time').text(
-            String(hours1).padStart(2, '0') + ":" +
-            String(minutes1).padStart(2, '0') + ":" +
-            String(seconds1).padStart(2, '0')
-        );
-    if (--timer1 < 0) {
-      clearInterval(interval1);
-      alert("Time's up!");
-    }
-  }, 1000);
-}
-
-
-
 $('input[name="xxans_option"]').change(function () {
   let selected = $(this).val();
   $.post('<?php echo base_url();?>/Quizanswer/save_answer', {
@@ -451,10 +584,9 @@ $(document).on('click', '#submit-button', function () {
         question_number: currentQuestionNumber,
         selected_answer: selected
     }, function (response) {
-        
         if(response.attempted>totalQuestions){
           response.attempted=totalQuestions;
-        } 
+        }
         $('#attempted-count').html(response.attempted);
         let c_not_attempted=response.not_attempted;
         if(response.not_attempted<=-1){
@@ -496,9 +628,9 @@ document.getElementById('finish-exam').addEventListener('click', function () {
 
 
     let countdown;
-    let timeLeft = 3;
+    let timeLeft = 30;
     function startTimerj() {
-       timeLeft = 3;
+       timeLeft = 30;
       $('#submit-button').prop('disabled', true);
       $('#timer').text(`Please wait ${timeLeft} seconds...`);
 
@@ -516,12 +648,35 @@ document.getElementById('finish-exam').addEventListener('click', function () {
       }, 1000);
     }
 
+    // $(document).ready(function () {
+    //   startTimerj();
+    // });
+    
+    
     $("#reset-button").click(function() {
       $('input[name="ans_option"]').prop('checked', false);
     });
+    
+    function startTimerj_remaining(duration1) {
+    let timer1 = duration1*60;
+    let interval1 = setInterval(function () {
+        let hours1 = Math.floor(timer1 / 3600);
+        let minutes1 = Math.floor((timer1 % 3600) / 60);
+        let seconds1 = timer1 % 60;
+        console.log(timer1,hours1,minutes1,seconds1,"ffff"); 
+        $('#remaining_time').text(
+            String(hours1).padStart(2, '0') + ":" +
+            String(minutes1).padStart(2, '0') + ":" +
+            String(seconds1).padStart(2, '0')
+        );
+    if (--timer1 < 0) {
+      clearInterval(interval1);
+      alert("Time's up!");
+    }
+  }, 1000);
+}
 
 </script>
-
 <style>
   #rotate-warning {
     display: none;
@@ -539,6 +694,21 @@ document.getElementById('finish-exam').addEventListener('click', function () {
 </style>
 
 <div id="rotate-warning">Please rotate your device to <strong>landscape mode</strong>.</div>
- 
+
+<script>
+  function checkOrientation() {
+  
+    if (window.innerHeight > window.innerWidth) {
+       alert("Hi student, please rotate your phone to portrait mode for the best experience.");
+      document.getElementById("rotate-warning").style.display = "block";
+    } else {
+      // Landscape mode
+      document.getElementById("rotate-warning").style.display = "none";
+    }
+  }
+
+  window.addEventListener("resize", checkOrientation);
+  window.addEventListener("load", checkOrientation);
+</script>
 
 <?php include('footerquiz.php');?>

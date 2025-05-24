@@ -15,10 +15,9 @@
                         <div class="ps-md-1-6 ps-lg-1-9">
                             <h3 class="text-primary h5 mb-2-2">About</h3>
                             <ul class="footer-list">
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="courses-list.html">Courses</a></li>
-                                <li><a href="instructors.html">Instructor</a></li>
-                                <li><a href="event-list.html">Event</a></li>
+                                <li><a href="<?php echo base_url('about-us');?>">About Us</a></li>
+                                <li><a href="<?php echo base_url('contact');?>">Contact us</a></li>
+                                <li><a href="<?php echo base_url('compile-code')?>">Conmpiler</a></li>
                             </ul>
                         </div>
                     </div>
@@ -26,10 +25,8 @@
                         <div class="ps-lg-1-9 ps-xl-2-5">
                             <h3 class="text-primary h5 mb-2-2">Link</h3>
                             <ul class="footer-list">
-                                <li><a href="blog-grid.html">News &amp; Blogs</a></li>
-                                <li><a href="portfolio.html">Portfolio</a></li>
-                                <li><a href="faq.html">FAQ's</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Privacy & Policy</a></li>
+                                <li><a href="#">Terms & conditions</a></li>
                             </ul>
                         </div>
                     </div>

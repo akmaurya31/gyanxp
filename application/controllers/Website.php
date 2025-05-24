@@ -84,7 +84,7 @@ class Website extends CI_Controller {
 	{
 		//echo $quiz_id = 7;//$this->session->userdata('quiz_id');
 		//echo $user_id = 7;//$this->session->userdata('user_id');
-
+		$quizlist =$this->session->userdata('quizlist');
 		$quiz_id =$this->session->userdata('quiz_id');
 		$user_id =$this->session->userdata('user_id');
 		$this->session->set_userdata('quiz_id', $quiz_id);
@@ -95,16 +95,18 @@ class Website extends CI_Controller {
 			return;
 		}
 
+		$data['quizlist'] = $quizlist;
 		$data['quiz_id'] = $quiz_id;
 		$data['user_id'] = $user_id;
 		$data['result'] = $this->Quizans_model->get_user_quiz_result($user_id, $quiz_id);
 		$data['stuname'] = $this->session->userdata('name');
 		$data['quizname'] = $this->Quiz_model->get_quiz_name();
 
+		$this->db->query("DELETE FROM answers WHERE user_id = '$user_id' AND quiz_id = '$quiz_id'");
 		//print_r($data);
 		//die("ASdf");
 
-
+        $this->session->set_userdata('quiz_reset', 1);
 		$this->load->view('website/quizresult', $data); // Pass $data here
 	}
 	
@@ -150,10 +152,11 @@ class Website extends CI_Controller {
 	
 	public function quizlist($course_id = null)
 	{
+	    $this->session->set_userdata('quiz_reset', 0);
+ 		$this->session->set_userdata('quizlist',$course_id);
 		$course = $this->db->get_where('courses', ['id' => $course_id])->row();
 
 		$quizzes = $this->db->get_where('quizzes', ['course_id' => $course_id])->result();
-
 		
 
 		// select answers where quiz_id 

@@ -40,6 +40,7 @@
 
         <div class="status <?= $status_class ?>" style="margin-top: 10px; font-size: 18px; font-weight: bold; color: <?= ($status_class == 'pass') ? 'green' : 'red' ?>;">
             <?= $status_text ?>
+            <p class="py-2 text-center"><a href="<?php echo base_url('quizlist/'.$quizlist); ?>" class="btn btn-primary ">Back to Quiz</a></p>
         </div>
 
     <?php else: ?>

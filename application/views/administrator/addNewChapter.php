@@ -1,5 +1,5 @@
 <?php include('header.php'); ?>
-
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
  
 <body class="nav-md">
     <div class="container body">
@@ -65,7 +65,7 @@
                                     <div class="row form-group">
                                         <div class="col-md-12">
                                             <label for="description">Description</label>
-                                            <textarea name="description" class="form-control ckeditor" rows="4"><?= set_value('description') ?></textarea>
+                                            <textarea name="description" class="form-control ckeditor" rows="4" id="editor"><?= set_value('description') ?></textarea>
                                             <?= form_error('description', '<div class="error">', '</div>'); ?>
                                         </div>
                                     </div>

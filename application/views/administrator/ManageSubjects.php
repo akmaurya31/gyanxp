@@ -79,7 +79,7 @@
                                   <a href="<?php echo base_url('Subjects/EditNewSubject/'.$li->id);?>" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>
                                   </a>
-                                  <a href="<?php echo base_url('Subjects/DeleteNewSubject/'.$li->id);?>" class="btn btn-danger btn-sm">
+                                  <a href="<?php echo base_url('Subjects/DeleteNewSubject/'.$li->id);?>"  onclick="return confirm('Delete this subject?')" class="btn btn-danger btn-sm">
                                     <i class="fa fa-trash"></i>
                                   </a>
 
