@@ -94,9 +94,18 @@
 $where              = array('status'=>'active');
 $id                 = 'position';
 $courses   = $this->login_model->getWhereAndOrderBy('courses',$where,$id);
-if(!empty($courses)){ foreach($courses as $course){?>
-   <li><a href="<?php echo base_url('course-details/'.$course->id.'?='.$course->course_name);?>"><?php echo $course->course_name;?></a></li>
-<?php }}?>
+if(!empty($courses)){ 
+    foreach($courses as $course){
+         if (in_array($course->id, [4, 5, 6, 7])) {
+        ?>
+   <li><a href="<?php echo base_url('course-details/'.$course->id.'?='.$course->course_name);?>">
+    <?php echo $course->course_name;?></a>
+  </li>
+<?php
+        }
+
+}}
+?>
 
 
                                         <li>

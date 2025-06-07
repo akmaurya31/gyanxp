@@ -31,7 +31,9 @@
                     <div class="card-body">
                         <div class="box">
                             <h5 class="card-title"></h5>
-                            <span class="icon-share"> <i class="bi bi-share-fill" style="cursor: pointer;"></i></span>
+                            <a href="https://wa.me/?text=<?php echo base_url('quiza/' . $quiz->id); ?>" target="_blank" style="text-decoration: none;" >
+                                <span class="icon-share"> <i class="bi bi-share-fill" style="cursor: pointer;"></i></span>
+                            </a>
                         </div>
                         
                         <p class="fw-semibold mb-2"><?php echo $quiz->title ?> </p>
@@ -55,7 +57,7 @@
                                  ?> Attempted</p>
                             </div>
                             <div class="div-right">
-                            <a href="<?php echo base_url('quiza/' . $quiz->id); ?>" class="mt-3 button-b">Start Test</a>
+                            <a href="<?php echo base_url('quiza/' . $quiz->id); ?>" class="mt-3 btn btn-sm btn-success">Start Test</a>
                             <!-- http://localhost/boostingskills/quiz -->
 
                                 <!-- <button class=" mt-3 button-b">

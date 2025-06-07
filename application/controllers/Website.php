@@ -69,6 +69,7 @@ class Website extends CI_Controller {
 	
 	public function userlogin()
 	{
+		// $this->session->set_userdata('redirect_after_login', current_url());
 		$user_id = $this->session->userdata('user_id');
 		
 		if ($user_id) {
@@ -103,9 +104,10 @@ class Website extends CI_Controller {
 		$data['quizname'] = $this->Quiz_model->get_quiz_name();
 
 		$this->db->query("DELETE FROM answers WHERE user_id = '$user_id' AND quiz_id = '$quiz_id'");
+		$this->db->query("UPDATE quizzes SET attempted = attempted + 1 WHERE quiz_id = '$quiz_id'");
 		//print_r($data);
 		//die("ASdf");
-
+        $this->session->set_userdata('redirect_after_login', current_url());
         $this->session->set_userdata('quiz_reset', 1);
 		$this->load->view('website/quizresult', $data); // Pass $data here
 	}
@@ -179,6 +181,18 @@ class Website extends CI_Controller {
 
 		// Redirect to login page or homepage
 		redirect('userlogin');
+	}
+
+
+	public function privacypolicy(){
+		$data['quizzes'] = '';
+		$this->load->view('website/privacypolicy', $data);
+	}
+
+	
+	public function termsconditions(){
+		$data['quizzes'] = '';
+		$this->load->view('website/termsconditions', $data);
 	}
 
 

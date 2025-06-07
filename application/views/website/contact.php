@@ -121,7 +121,7 @@
                                     <div class="quform-element form-group">
                                         <label for="phone">Contact Number</label>
                                         <div class="quform-input">
-                                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Your phone here" />
+                                            <input class="form-control" id="phone" type="text" name="phone" max="10" min="10" placeholder="Your phone here" />
                                         </div>
                                     </div>
                                 </div>

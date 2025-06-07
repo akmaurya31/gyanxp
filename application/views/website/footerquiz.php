@@ -28,3 +28,55 @@
 </body>
 
 </html>
+
+<script>
+  // document.addEventListener('contextmenu', function(e) {
+  //   alert("Right click is disabled on this site.");
+  //   e.preventDefault();
+  // });
+</script>
+
+<!-- Disable Right Click, Copy, Cut, Paste, Text Selection, and Keyboard Shortcuts -->
+<style>
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+</style>
+
+<script>
+  // Disable right click
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable text selection
+  document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable copy, cut, and paste
+  document.addEventListener('copy', function(e) {
+    e.preventDefault();
+  });
+  document.addEventListener('cut', function(e) {
+    e.preventDefault();
+  });
+  document.addEventListener('paste', function(e) {
+    e.preventDefault();
+  });
+
+  // Disable common keyboard shortcuts
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && ['c', 'u', 's', 'a', 'x', 'p'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+      return false;
+    }
+    if (e.key === 'F12') {
+      e.preventDefault();
+      return false;
+    }
+  };
+</script>

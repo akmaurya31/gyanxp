@@ -109,3 +109,6 @@ $route['update-photo-process'] = 'student/updatePhotoProcess';
 $route['update-password-process'] = 'student/updatePasswordProcess';
 
 $route['subject'] = 'student/subjectAdd';
+
+$route['privacy-policy'] = 'website/privacypolicy';
+$route['terms-conditions'] = 'website/termsconditions';

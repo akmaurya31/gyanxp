@@ -264,10 +264,8 @@
 <div class="choice-option">
     <div class="choice-answer" id="answer_A" style="display: flex;">(A) <span id="option_a_en"> </span>  (A) <span id="option_a_hi"></span></div>
     <div class="choice-answer" id="answer_B" style="display: flex;">(B) <span id="option_b_en"></span>  (B) <span id="option_b_hi"></span></div>
-
     <div class="choice-answer" id="answer_C" style="display: flex;">(C) <span id="option_c_en"></span> (C) <span id="option_c_hi"></span></div>
     <div class="choice-answer" id="answer_D" style="display: flex;">(D) <span id="option_d_en"></span>  (D) <span id="option_d_hi"></span></div>
-
 </div>
 </form>
 </div>
@@ -278,19 +276,19 @@
 <div class="footer">
 <div class="select">
 <div class="choice-answer">
-<div class="choice-answer-check  cansA">
+<div class="choice-answer-check">
 <input type="radio" class="radio-button" name="ans_option" id="answer_A_value" value="A">
 <span id="answer_A_option">A</span>
 </div>
-<div class="choice-answer-check cansB">
+<div class="choice-answer-check">
 <input type="radio" class="radio-button" name="ans_option" id="answer_B_value" value="B">
 <span id="answer_B_option">B</span>
 </div>
-<div class="choice-answer-check cansC">
+<div class="choice-answer-check">
 <input type="radio" class="radio-button" name="ans_option" id="answer_C_value" value="C">
 <span id="answer_C_option">C</span>
 </div>
-<div class="choice-answer-check cansD">
+<div class="choice-answer-check">
 <input type="radio" class="radio-button" name="ans_option" id="answer_D_value" value="D">
 <span id="answer_D_option">D</span>
 </div>
@@ -483,23 +481,6 @@ function loadQuestion(questionNumber) {
 
     $('#option_a_hi').text(res.question.option_a_hi);
     $('#option_b_hi').text(res.question.option_b_hi);
-
-    if(res.question.option_c_en==''){
-      $('#answer_C').hide();
-      $('.cansC').hide();
-    }else{
-      $('#answer_C').show();
-      $('.cansC').show();
-    }
-    
-    if(res.question.option_d_en==''){
-      $('#answer_D').hide();
-      $('.cansD').hide();
-    }else{
-      $('#answer_D').show();
-      $('.cansD').show();
-    }
-
     $('#option_c_hi').text(res.question.option_c_hi);
     $('#option_d_hi').text(res.question.option_d_hi);
 
@@ -560,7 +541,7 @@ function startTimerj(duration) {
 
     if (--timer < 0) {
       clearInterval(interval);
-      alert("Time's up!...");
+      alert("Time's up!.");
       // Auto-submit logic here
     }
   }, 1000);
@@ -690,8 +671,7 @@ document.getElementById('finish-exam').addEventListener('click', function () {
         );
     if (--timer1 < 0) {
       clearInterval(interval1);
-      // alert("Time's up!....");
-      window.location.href = baseUrl + '';
+      alert("Time's up!..");
     }
   }, 1000);
 }

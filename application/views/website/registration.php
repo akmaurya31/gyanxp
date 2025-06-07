@@ -52,7 +52,7 @@
 
         <div class="quform-element form-group">
             <div class="quform-input">
-                <input class="form-control" id="phone" type="text" name="phone" placeholder="Your Mobile Number" pattern="[0-9]{10}" title="Enter 10 digit mobile number" required />
+                <input class="form-control" id="phone" type="text" name="phone" placeholder="Your Mobile Number" pattern="[0-9]{10}" title="Enter 10 digit mobile number" min="10" max="10" required />
             </div>
         </div>
 

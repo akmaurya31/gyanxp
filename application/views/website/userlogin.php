@@ -89,10 +89,11 @@ $(document).ready(function () {
             data: $(this).serialize(),
             dataType: 'json',
             success: function (response) {
+                console.log(response,"Asdfadf");
                 if (response.status) {
                     toastr.success(response.message);
                     setTimeout(() => {
-                        window.location.href = '<?php echo base_url(); ?>#quiz'; // Update this path as needed
+                       // window.location.href = '<?php echo base_url(); ?>#quiz'; 
                     }, 1500);
                 } else {
                     toastr.error(response.message);

@@ -84,6 +84,12 @@ public function register222() {
 
     public function loginUser()
 {
+
+    $redirect = $this->session->userdata('redirect_after_login');
+    $this->session->unset_userdata('redirect_after_login'); // optional
+   // redirect($redirect);
+
+
     // Form se email aur password le rahe hain
     $email    = $this->input->post('email');
     $password = $this->input->post('password');
@@ -99,13 +105,14 @@ public function register222() {
                 'user_id'   => $user->id,
                 'name'      => $user->name,
                 'email'     => $user->email,
-                'logged_in' => true
+                'logged_in' => true,
             ));
 
             // JSON response for AJAX success
             echo json_encode(array(
                 'status'  => true,
-                'message' => 'Login successful'
+                'message' => 'Login successful',
+                'backURL'  => $redirect,
             ));
         } else {
             echo json_encode(array(

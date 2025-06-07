@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <ul>
                     <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <li><a href="#!">Compiler/a></li>
+                    <li><a href="#!">Compiler</a></li>
                 </ul>
             </div>
         </div>

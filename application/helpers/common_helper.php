@@ -6,6 +6,21 @@ if (!function_exists('getTotalUsersAttempted')) {
         $CI = &get_instance(); // Get CodeIgniter instance
         $CI->load->database(); // Make sure DB is loaded
 
+        $query = $CI->db->select('course_id,title,attempted AS total_users_attempted')
+                        ->from('quizzes')
+                        ->where('id', $quiz_id)
+                        ->get();
+
+        return $query->row(); // Return single row
+    }
+
+
+
+     function getTotalUsersAttempted222($quiz_id)
+    {
+        $CI = &get_instance(); // Get CodeIgniter instance
+        $CI->load->database(); // Make sure DB is loaded
+
         $query = $CI->db->select('quiz_id')
                         ->select('COUNT(DISTINCT user_id) AS total_users_attempted')
                         ->from('answers')
